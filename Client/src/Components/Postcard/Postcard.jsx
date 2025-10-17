@@ -1,11 +1,11 @@
 import React from "react";
-import "./Postcard.css";
+import "./PostCard.css";
 import { MdVolumeUp } from "react-icons/md";
 import { FiBookOpen } from "react-icons/fi";
 import { FaRegComment } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-function Postcard({ post }) {
+function PostCard({ post }) {
   return (
     <div className="post-card">
       <div className="comment-count">
@@ -38,4 +38,4 @@ function Postcard({ post }) {
   );
 }
 
-export default Postcard;
+export default PostCard;

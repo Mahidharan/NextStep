@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import "./Postdetails.css";
 
-function Postdetails({ posts }) {
+function PostDetails({ posts }) {
   const { id } = useParams();
   const post = posts?.find((p) => p.id === parseInt(id));
 
@@ -69,4 +69,4 @@ function Postdetails({ posts }) {
   );
 }
 
-export default Postdetails;
+export default PostDetails;

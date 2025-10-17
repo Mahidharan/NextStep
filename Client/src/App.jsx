@@ -1,6 +1,6 @@
 import Home from "./Pages/Home/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Postdetails from "./Pages/PostDetails/Postdetails";
+import PostDetails from "./Pages/PostDetails/Postdetails";
 
 function App() {
   const posts = [
@@ -33,7 +33,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home posts={posts} />} />
-        <Route path="/post/:id" element={<Postdetails posts={posts} />} />
+        <Route path="/post/:id" element={<PostDetails posts={posts} />} />
       </Routes>
     </Router>
   );
