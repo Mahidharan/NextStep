@@ -1,11 +1,12 @@
 .post-card {
-  background-color: #1e293b;
+  background-color: #071831;
   color: white;
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   max-width: 700px;
+  position: relative;
 }
 
 .post-card:hover {
@@ -44,6 +45,24 @@
   cursor: pointer;
   font-weight: 600;
   transition: background-color 0.3s ease;
+}
+
+.comment-count {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #0f172a;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #d1d5db;
+}
+
+.comment-count svg {
+  color: #7c3aed; /* purple icon */
 }
 
 .read-aloud:hover,

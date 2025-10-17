@@ -1,0 +1,135 @@
+.post-detail-page {
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  padding-top: 80px;
+}
+
+.post-detail-card {
+  background-color: #071831;
+  width: 90%;
+  max-width: 700px;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+}
+
+.post-detail-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+}
+
+.post-header h2 {
+  font-size: 1.3rem;
+  color: #c084fc;
+}
+
+.post-header p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.post-body {
+  color: #fff;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  background-color: #0d2340;
+  padding: 15px 20px;
+  border-radius: 10px;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  max-height: none;
+}
+
+.post-comments {
+  background-color: #273449;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: inset 0 0 8px rgba(139, 92, 246, 0.15);
+}
+
+.post-comments h3 {
+  font-size: 1.1rem;
+  color: #c084fc;
+  margin-bottom: 10px;
+}
+
+.post-comments ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 10px;
+}
+
+.post-comments li {
+  background-color: #334155;
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: #e2e8f0;
+  font-size: 0.95rem;
+}
+
+.add-comment {
+  display: flex;
+  margin-top: 10px;
+  gap: 6px;
+}
+
+.add-comment input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #475569;
+  background-color: #0f172a;
+  color: #f1f5f9;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.add-comment input:focus {
+  border-color: #8b5cf6;
+}
+
+.add-comment button {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  background-color: #8b5cf6;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.add-comment button:hover {
+  background-color: #a78bfa;
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #c084fc;
+  background-color: #1e1b4b;
+  padding: 8px 14px;
+  border-radius: 10px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.back-button:hover {
+  background-color: #4c1d95;
+  transform: translateY(-2px);
+}

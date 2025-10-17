@@ -3,31 +3,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import "./Home.css";
 import Postcard from "../../Components/Postcard/Postcard";
 
-function Home() {
-  const posts = [
-    {
-      id: 1,
-      username: "Elango",
-      company: "Payota",
-      experience:
-        "I went through multiple rounds of interviews and learned a lot about problem solving and system design...",
-    },
-    {
-      id: 2,
-      username: "Nithi",
-      company: "VijayFancy",
-      experience:
-        "I went through multiple rounds of interviews and learned a lot about problem solving and system design...",
-    },
-    {
-      id: 3,
-      username: "Jarvis",
-      company: "Stark Industries",
-      experience:
-        "I went through multiple rounds of interviews and learned a lot about problem solving and system design...",
-    },
-  ];
-
+function Home({ posts }) {
   return (
     <div className="home">
       <Navbar />
