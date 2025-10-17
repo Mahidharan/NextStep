@@ -1,0 +1,12 @@
+.home {
+  background-color: #0f172a;
+  min-height: 100vh;
+  color: white;
+}
+
+.post-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 20px;
+}

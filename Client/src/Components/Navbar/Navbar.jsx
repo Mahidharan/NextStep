@@ -19,6 +19,8 @@ function Navbar() {
       </ul>
 
       <div className="nav-right">
+                <button className="create-post-btn">Create Post</button>
+
         <img src={UserIcon} alt="User" className="profile-img" />
       </div>
     </nav>

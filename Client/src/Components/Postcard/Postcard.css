@@ -1,0 +1,52 @@
+.post-card {
+  background-color: #1e293b;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-width: 700px;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(155, 93, 229, 0.5);
+}
+
+.username {
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.company {
+  font-weight: 500;
+  color: #9ca3af;
+  margin-bottom: 10px;
+}
+
+.experience {
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.read-aloud,
+.read-more {
+  background-color: #7c3aed;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.read-aloud:hover,
+.read-more:hover {
+  background-color: #9f67ff;
+}
