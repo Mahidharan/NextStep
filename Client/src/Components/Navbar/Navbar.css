@@ -1,0 +1,82 @@
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color:#0d2340;
+  color: white;
+  padding:  0 2px;
+  box-shadow: 0 4px 10px rgba(25, 3, 50, 0.4); 
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 45px;
+  height: 45px;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+}
+
+.nav-links li {
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.nav-links li:hover {
+  background-color: #0d3b56; 
+}
+
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-right: 20px;
+}
+
+
+
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.profile-img:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+}
