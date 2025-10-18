@@ -1,80 +1,156 @@
-.profile-page {
-  color: #e2e8f0;
+.profile-layout {
+  display: flex;
+  background-color: #0f1117;
+  color: #e5e5e5;
+  min-height: 100vh;
   font-family: "Poppins", sans-serif;
-  margin-top: 80px;
-  display: flex;
-  align-items: center;
+  margin-top: 40px;
 }
-.profile-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  width: 90%;
-  max-width: 1000px;
-  margin-top: 20px;
-}
-.profile-content {
-  background-color: #071831;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
-  flex: 1 1 280px;
-  min-width: 280px;
-  max-width: 320px;
+
+.profile-sidebar {
+  width: 14rem;
+  background-color: #151823;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  padding: 40px 20px;
+  border-right: 1px solid #262a3a;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="file"],
-input[type="url"] {
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #475569;
-  background-color: #0f172a;
-  color: #f1f5f9;
-  outline: none;
-  transition: border 0.3s;
+.profile-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 3px solid #6c63ff;
+  margin-bottom: 10px;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="file"]:focus {
-  border-color: #8b5cf6;
-}
-
-.save-btn {
-  margin-top: 20px;
-  padding: 12px 0;
-  width: 100%;
-  border: none;
-  border-radius: 12px;
-  background-color: #8b5cf6;
-  color: white;
+.profile-name {
+  font-size: 1.1rem;
   font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.save-btn:hover {
-  background-color: #a78bfa;
+.profile-email {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 15px;
 }
 
-.edit-btn {
-  margin-top: 10px;
-  padding: 10px 0;
-  width: 100%;
+.sidebar-btn {
+  background-color: #6c63ff;
   border: none;
-  border-radius: 12px;
-  background-color: #475569;
+  padding: 8px 18px;
+  border-radius: 8px;
   color: white;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: 0.3s;
 }
+
+.sidebar-btn:hover {
+  background-color: #7c73ff;
+}
+
+.profile-main {
+  flex: 1;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.profile-card {
+  background-color: #151823;
+  border: 1px solid #262a3a;
+  border-radius: 16px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border 0.3s ease;
+}
+
+.document-card {
+  background-color: #151823;
+  border: 1px solid #262a3a;
+  border-radius: 1.5rem;
+  padding: 1.2rem;
+  max-height: 9.5rem;
+}
+
+.document-card .edit-btn,
+.save-btn {
+  margin-top: 1rem;
+}
+
+.profile-card:hover {
+  border-color: #6c63ff;
+}
+
+.profile-card h3 {
+  font-size: 1.1rem;
+  color: #fff;
+  border-bottom: 1px solid #2a2e40;
+  padding-bottom: 8px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card-body label {
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+.card-body input {
+  background-color: #1a1d29;
+  border: 1px solid #2e3249;
+  border-radius: 8px;
+  padding: 10px;
+  color: #ddd;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.card-body input:focus {
+  border-color: #6c63ff;
+}
+
+.edit-btn,
+.save-btn {
+  align-self: flex-end;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.edit-btn {
+  background: transparent;
+  border: 1px solid #6c63ff;
+  color: #6c63ff;
+}
+
 .edit-btn:hover {
-  background-color: #64748b;
+  background-color: #6c63ff;
+  color: #fff;
+}
+
+.save-btn {
+  background-color: #6c63ff;
+  border: none;
+  color: #fff;
+}
+
+.save-btn:hover {
+  background-color: #7a70ff;
+}
+
+.resume-info {
+  font-size: 0.85rem;
+  color: #999;
 }
