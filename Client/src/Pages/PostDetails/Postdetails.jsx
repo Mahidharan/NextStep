@@ -13,7 +13,8 @@ function PostDetails({ posts }) {
   const handleAddComment = () => {
     if (newComment.trim() === "") return;
 
-    setComments([...comments, newComment]);
+    const newCommentObj = { username: "You", text: newComment };
+    setComments([...comments, newCommentObj]);
     setNewComment("");
   };
 
@@ -47,7 +48,9 @@ function PostDetails({ posts }) {
           <h3>Comments ({comments.length}) </h3>
           <ul>
             {comments.map((comment, index) => (
-              <li key={index}> {comment} </li>
+              <li key={index}>
+                <strong>{comment.username}</strong>: {comment.text}
+              </li>
             ))}
           </ul>
           <div className="add-comment">

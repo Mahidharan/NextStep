@@ -1,0 +1,80 @@
+.profile-page {
+  color: #e2e8f0;
+  font-family: "Poppins", sans-serif;
+  margin-top: 80px;
+  display: flex;
+  align-items: center;
+}
+.profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 90%;
+  max-width: 1000px;
+  margin-top: 20px;
+}
+.profile-content {
+  background-color: #071831;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+  flex: 1 1 280px;
+  min-width: 280px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="file"],
+input[type="url"] {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #475569;
+  background-color: #0f172a;
+  color: #f1f5f9;
+  outline: none;
+  transition: border 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="file"]:focus {
+  border-color: #8b5cf6;
+}
+
+.save-btn {
+  margin-top: 20px;
+  padding: 12px 0;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  background-color: #8b5cf6;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.save-btn:hover {
+  background-color: #a78bfa;
+}
+
+.edit-btn {
+  margin-top: 10px;
+  padding: 10px 0;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  background-color: #475569;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.edit-btn:hover {
+  background-color: #64748b;
+}

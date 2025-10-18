@@ -1,6 +1,7 @@
 import Home from "./Pages/Home/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PostDetails from "./Pages/PostDetails/Postdetails";
+import Profile from "./Pages/Profile/profile";
 
 function App() {
   const posts = [
@@ -9,8 +10,14 @@ function App() {
       username: "Elango",
       company: "Payota",
       experience:
-        "I went through multiple rounds of interviews and learned a lot about problem solving and system design...",
-      comments: ["Great experience!", "Thanks for sharing!"],
+        "I went through multiple rounds of interviews and learned a lot about problem solving and system design I went through multiple rounds of interviews and learned a lot about problem solving and system design...",
+      comments: [
+        {
+          username: "Steve Roger",
+          text: "Great",
+        },
+        { username: "Bruce", text: "Insightfull" },
+      ],
     },
     {
       id: 2,
@@ -18,7 +25,16 @@ function App() {
       company: "VijayFancy",
       experience:
         "I went through multiple rounds of interviews and learned a lot about problem solving and system design...",
-      comments: ["Great experience!", "Thanks for sharing!"],
+      comments: [
+        {
+          username: "Steve Roger",
+          text: "Great",
+        },
+        {
+          username: "Bruce",
+          text: "Nice one",
+        },
+      ],
     },
     {
       id: 3,
@@ -26,7 +42,13 @@ function App() {
       company: "Stark Industries",
       experience:
         "I went through multiple rounds of interviews and learned a lot about problem solving and system design...",
-      comments: ["Great experience!", "Thanks for sharing!"],
+      comments: [
+        {
+          username: "Steve Roger",
+          text: "Great",
+        },
+        { username: "Bruce", text: "Great Experience" },
+      ],
     },
   ];
   return (
@@ -34,6 +56,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home posts={posts} />} />
         <Route path="/post/:id" element={<PostDetails posts={posts} />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );
