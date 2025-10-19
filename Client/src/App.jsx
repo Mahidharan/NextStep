@@ -58,7 +58,7 @@ function App() {
         <Route path="/" element={<Home posts={posts} />} />
         <Route path="/post/:id" element={<PostDetails posts={posts} />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login />}></Route>
       </Routes>
     </Router>
   );

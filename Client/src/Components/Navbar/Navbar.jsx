@@ -21,9 +21,9 @@ function Navbar() {
       </div>
       <ul className="nav-links">
         <li onClick={() => handleMenuChange("/")}>Home</li>
-        <li onClick={() => handleMenuChange("profile")}>My Profile</li>
+        <li onClick={() => handleMenuChange("/profile")}>My Profile</li>
         <li>Chat</li>
-        <li>LogOut</li>
+        <li className="logout">LogOut</li>
       </ul>
 
       <div className="nav-right">

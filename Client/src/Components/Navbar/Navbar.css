@@ -2,7 +2,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #071228;
+  background: #000428;
+  background: -webkit-linear-gradient(to right, #004e92, #000428);
+  background: linear-gradient(to right, #010953, #000428);
   color: white;
   padding: 0 2px;
   box-shadow: 0 1px 8px rgba(24, 119, 242, 0.2);
@@ -37,7 +39,7 @@
   gap: 30px;
   margin: 0;
   padding: 0;
-  font-weight: 600;
+  font-weight: 400;
   font-family: "Inter", sans-serif;
 }
 
@@ -49,7 +51,11 @@
 }
 
 .nav-links li:hover {
-  background-color: #0d3b56;
+  background-color: #00887f;
+}
+
+.nav-links .logout:hover {
+  background-color: red;
 }
 
 .nav-right {

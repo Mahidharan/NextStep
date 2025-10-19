@@ -1,6 +1,5 @@
 .profile-layout {
   display: flex;
-  background-color: #0f1117;
   color: #e5e5e5;
   min-height: 100vh;
   font-family: "Poppins", sans-serif;
@@ -9,7 +8,7 @@
 
 .profile-sidebar {
   width: 14rem;
-  background-color: #151823;
+  background-color: #15182394;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,7 +59,7 @@
 }
 
 .profile-card {
-  background-color: #151823;
+  background: linear-gradient(to right, #01244470, #00042875);
   border: 1px solid #262a3a;
   border-radius: 16px;
   padding: 25px;
@@ -71,11 +70,16 @@
 }
 
 .document-card {
-  background-color: #151823;
+  background: linear-gradient(to right, #01244470, #00042875);
   border: 1px solid #262a3a;
   border-radius: 1.5rem;
   padding: 1.2rem;
   max-height: 9.5rem;
+  transition: border 0.3s ease;
+}
+
+.document-card:hover {
+  border-color: #6c63ff;
 }
 
 .document-card .edit-btn,
@@ -106,7 +110,7 @@
 }
 
 .card-body input {
-  background-color: #1a1d29;
+  background-color: #252c4b6b;
   border: 1px solid #2e3249;
   border-radius: 8px;
   padding: 10px;

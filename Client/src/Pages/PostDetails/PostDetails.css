@@ -8,7 +8,7 @@
 }
 
 .post-detail-card {
-  background-color: #071831;
+  background: linear-gradient(to right, #36404a98, #29323c93);
   width: 90%;
   max-width: 700px;
   padding: 25px;
@@ -33,7 +33,7 @@
 
 .post-header h2 {
   font-size: 1.3rem;
-  color: #c084fc;
+  color: #ddd;
 }
 
 .post-header p {
