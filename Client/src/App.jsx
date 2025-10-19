@@ -2,6 +2,7 @@ import Home from "./Pages/Home/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PostDetails from "./Pages/PostDetails/Postdetails";
 import Profile from "./Pages/Profile/profile";
+import Login from "./Pages/Login/Login";
 
 function App() {
   const posts = [
@@ -57,6 +58,7 @@ function App() {
         <Route path="/" element={<Home posts={posts} />} />
         <Route path="/post/:id" element={<PostDetails posts={posts} />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
