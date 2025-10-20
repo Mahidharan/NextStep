@@ -5,7 +5,13 @@ import Logo from "../../assets/logo.jpg";
 function Login() {
   return (
     <div className="login-container">
-      <div className="headings"></div>
+      <div className="headings">
+        <h2>Share, Learn, and Experience Interviews with NextStep</h2>
+        <p>
+          Connect with Peers, Share your experience, and improve your content
+          with AI
+        </p>
+      </div>
       <div className="outside-card">
         <div className="inside-card">
           <img src={Logo} alt="" />

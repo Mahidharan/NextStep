@@ -2,21 +2,45 @@
 
 .login-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  height: 80vh;
+  align-items: center;
   font-family: "Poppins", sans-serif;
   position: relative;
+  box-sizing: border-box;
+  padding: 1rem 2rem;
+  min-height: 100vh;
+}
+
+.headings {
+  margin-top: 1rem;
+}
+
+.headings h2 {
+  max-width: 600px;
+  max-width: 90%;
+  text-align: center;
+  margin-left: 2rem;
+}
+
+.headings p {
+  text-align: center;
+  font-size: 11px;
+  color: gray;
+  margin-bottom: 1rem;
 }
 
 .outside-card {
-  background-color: #012442;
+  background: radial-gradient(circle at center, #0b063ff0, #020024da 80%);
   padding: 1.5rem;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   overflow: hidden;
+  width: min(110%, 500px);
+  box-sizing: border-box;
+  border: 1px solid rgb(145, 145, 248);
 }
 
-@property --angle {
+/* @property --angle {
   syntax: "<angle>";
   initial-value: 0deg;
   inherits: false;
@@ -26,13 +50,13 @@
 .outside-card::before {
   content: "";
   position: absolute;
-  top: 50%;
+  top: 61.3%;
   left: 50%;
-  width: 37%;
-  height: 73%;
+  width: 38.9%;
+  height: 65.9%;
   translate: -50% -50%;
   z-index: -1;
-  padding: 5px;
+  padding: 3px;
   border-radius: 10px;
   background-image: conic-gradient(
     from var(--angle),
@@ -55,26 +79,26 @@
 .outside-card::before {
   filter: blur(1.5rem);
   opacity: 0.7;
-}
+} */
 
 .inside-card {
-  background-color: #012c45;
+  background-color: #e7e9ea0c;
   padding: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 0.75rem;
-  backdrop-filter: blur(80px);
-  border: 1px solid rgb(126, 174, 241);
 }
-p {
+.inside-card p {
   margin: 1rem;
+  text-align: center;
+  width: 100%;
 }
 
 img {
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 0.25rem;
 }
 
@@ -88,8 +112,17 @@ img {
   color: black;
   border: none;
   font-weight: bold;
+  width: 100%;
 }
 
 .terms {
-  width: 19rem;
+  margin-top: 2rem;
+  font-size: 12px;
+  width: 100%;
+  text-align: center;
+}
+
+.terms span {
+  color: blue;
+  cursor: pointer;
 }
