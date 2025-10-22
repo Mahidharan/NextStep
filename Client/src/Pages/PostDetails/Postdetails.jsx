@@ -40,6 +40,9 @@ function PostDetails({ posts }) {
           <h2>{post.username}</h2>
           <p>{post.company}</p>
         </div>
+        <div className="img-container">
+          <img src={post.postImage} alt="" />
+        </div>
         <div className="post-body">
           <p>{post.experience}</p>
         </div>

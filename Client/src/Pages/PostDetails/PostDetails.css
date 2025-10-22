@@ -4,14 +4,14 @@
   flex-direction: column;
   align-items: center;
   font-family: "Poppins", sans-serif;
-  padding-top: 80px;
+  padding-top: 5rem;
+  box-sizing: border-box;
 }
 
 .post-detail-card {
   background: linear-gradient(to right, #121619bf, #1c2127ca);
-  width: 90%;
-  max-width: 700px;
-  padding: 25px;
+  width: min(80%, 500px);
+  padding: 2rem;
   border-radius: 16px;
   box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
   transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
@@ -29,6 +29,7 @@
   border-bottom: 1px solid #334155;
   padding-bottom: 8px;
   margin-bottom: 15px;
+  flex-wrap: wrap;
 }
 
 .post-header h2 {
@@ -41,20 +42,23 @@
   font-size: 0.9rem;
 }
 
+.img-container img {
+  width: 100%;
+  height: 50%;
+  
+}
+
 .post-body {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 0.7rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   margin-bottom: 17px;
+  font-size: 0.8rem;
 }
 
 .post-comments {
   background-color: #273449;
-  padding: 15px;
+  padding: 10px;
   border-radius: 12px;
   box-shadow: inset 0 0 8px rgba(139, 92, 246, 0.15);
 }

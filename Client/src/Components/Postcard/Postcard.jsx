@@ -1,38 +1,49 @@
 import React from "react";
 import "./PostCard.css";
-import { MdVolumeUp } from "react-icons/md";
-import { FiBookOpen } from "react-icons/fi";
 import { FaRegComment } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { FiBookOpen } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 function PostCard({ post }) {
+  const navigate = useNavigate();
+
+  const changePage = (page) => {
+    if (!page) return;
+
+    navigate(page);
+  };
+
   return (
     <div className="post-card">
-      <div className="comment-count">
-        <FaRegComment size={18} />
-        <span>{post.comments.length}</span>
+      <div className="userinfo">
+        <img src={post.userAvatar} alt="elango avatar" />
+        <div className="uname-company">
+          <h3>{post.username}</h3>
+          <p> {post.company} </p>
+        </div>
       </div>
-
-      <h3 className="username"> {post.username}</h3>
-      <p className="company"> {post.company} </p>
-      <p className="experience">
-        {" "}
-        {post.experience.length > 100
-          ? post.experience.slice(0, 100) + "..."
-          : post.experience}{" "}
-      </p>
-
-      <div className="card-actions">
-        <button className="read-aloud">
-          <MdVolumeUp size={18} style={{ marginRight: "6px" }} />
-          Read Aloud
-        </button>
-        <Link to={`/post/${post.id}`}>
-          <button className="read-more">
-            <FiBookOpen size={18} style={{ marginRight: "6px" }} />
+      <div className="post-img">
+        <img src={post.postImage} alt="" />
+      </div>
+      <div className="experience">
+        <p>
+          {" "}
+          {post.experience.length > 100
+            ? post.experience.slice(0, 100) + "..."
+            : post.experience}
+        </p>
+      </div>
+      <div className="btn">
+        <div className="comment">
+          <FaRegComment />
+          {post.comments.length}
+        </div>
+        <div className="read-more">
+          <FiBookOpen />
+          <button onClick={() => changePage(`/post/${post.id}`)}>
             Read More
           </button>
-        </Link>
+        </div>
       </div>
     </div>
   );
