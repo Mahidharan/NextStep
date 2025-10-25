@@ -3,6 +3,7 @@ import "./PostCard.css";
 import { FaRegComment } from "react-icons/fa";
 import { FiBookOpen } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { MdOutlineReadMore } from "react-icons/md";
 
 function PostCard({ post }) {
   const navigate = useNavigate();
@@ -39,8 +40,8 @@ function PostCard({ post }) {
           {post.comments.length}
         </div>
         <div className="read-more">
-          <FiBookOpen />
           <button onClick={() => changePage(`/post/${post.id}`)}>
+            <MdOutlineReadMore className="icon" />
             Read More
           </button>
         </div>

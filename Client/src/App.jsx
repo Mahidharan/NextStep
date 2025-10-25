@@ -1,8 +1,9 @@
 import Home from "./Pages/Home/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import PostDetails from "./Pages/PostDetails/Postdetails";
+import PostDetails from "./Pages/PostDetails/PostDetails";
 import Profile from "./Pages/Profile/profile";
 import Login from "./Pages/Login/Login";
+import CreatePost from "./Pages/CreatePost/CreatePost";
 
 function App() {
   const posts = [
@@ -74,6 +75,7 @@ function App() {
         <Route path="/post/:id" element={<PostDetails posts={posts} />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/create-post" element={<CreatePost />} />
       </Routes>
     </Router>
   );

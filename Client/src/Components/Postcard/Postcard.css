@@ -1,6 +1,12 @@
 .post-card {
-  background: linear-gradient(to right, #121619bf, #1c2127ca);
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+  background: linear-gradient(
+    135deg,
+    rgba(30, 25, 70, 0.85),
+    rgba(15, 10, 35, 0.85)
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.25);
   width: min(100%, 700px);
   padding: 1rem;
   border-radius: 1rem;
@@ -10,7 +16,8 @@
 
 .post-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.35);
+  border-color: rgba(139, 92, 246, 0.35);
 }
 
 .userinfo {
@@ -92,11 +99,14 @@
 }
 
 .read-more button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   background-color: #8b5cf6;
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 6px 14px;
+  padding: 0.6rem;
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 500;
@@ -106,4 +116,8 @@
 .read-more button:hover {
   background-color: #a78bfa;
   transform: translateY(-2px);
+}
+
+.read-more .icon {
+  color: black;
 }
