@@ -34,7 +34,7 @@ function Navbar() {
           <FaUser className="icon" />
           <span>My Profile</span>
         </li>
-        <li>
+        <li onClick={() => handleMenuChange("/chat")}>
           <BsFillChatLeftFill className="icon" />
           <span>Chat</span>
         </li>
