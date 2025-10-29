@@ -58,57 +58,61 @@ function Chat() {
   // }, 8000);
 
   return (
-    <div className="chat-page">
+    <>
       <Navbar />
-      <div className="right-sidebar">
-        <div className="search-bar">
-          <input type="text" placeholder="Search User" />
-        </div>
-        <div className="user-list">
-          {users.map((user) => (
-            <div
-              key={user.id}
-              className={`user-item ${
-                selectedUser.id === user.id ? "active" : ""
-              }`}
-              onClick={() => setSelectedUser(user)}
-            >
-              <img src={user.avatar} alt={user.name} />
-              <div>
-                <h4>{user.name}</h4>
-                {user.online && <span className="online-dot"></span>}
+      <div className="chat-page">
+        <div className="right-sidebar">
+          <div className="search-bar">
+            <input type="text" placeholder="Search User" />
+          </div>
+          <div className="user-list">
+            {users.map((user) => (
+              <div
+                key={user.id}
+                className={`user-item ${
+                  selectedUser.id === user.id ? "active" : ""
+                }`}
+                onClick={() => setSelectedUser(user)}
+              >
+                <img src={user.avatar} alt={user.name} />
+                <div>
+                  <h4>{user.name}</h4>
+                  {user.online && <span className="online-dot"></span>}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+        <div className="msg-container">
+          <div className="chat-header">
+            <img src={selectedUser.avatar} alt="" />
+            <h3>{selectedUser.name}</h3>
+          </div>
+          <div className="chat-body">
+            {message.map((msg, index) => (
+              <div
+                key={index}
+                className={`message ${
+                  msg.sender === "me" ? "sent" : "received"
+                }`}
+              >
+                {msg.text}
+              </div>
+            ))}
+          </div>
+          <div className="chat-input">
+            <input
+              type="text"
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+            />
+            <button onClick={sendMessage}>
+              <FaPaperPlane /> Send
+            </button>
+          </div>
         </div>
       </div>
-      <div className="msg-container">
-        <div className="chat-header">
-          <img src={selectedUser.avatar} alt="" />
-          <h3>{selectedUser.name}</h3>
-        </div>
-        <div className="chat-body">
-          {message.map((msg, index) => (
-            <div
-              key={index}
-              className={`message ${msg.sender === "me" ? "sent" : "received"}`}
-            >
-              {msg.text}
-            </div>
-          ))}
-        </div>
-        <div className="chat-input">
-          <input
-            type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-          />
-          <button onClick={sendMessage}>
-            <FaPaperPlane /> Send
-          </button>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 

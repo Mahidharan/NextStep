@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Profile.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import Avatar from "../../assets/defaultavatar.png";
+import { FaUpload } from "react-icons/fa";
 
 function Profile({ currentUser }) {
   const [userData, setUserData] = useState({
@@ -111,11 +112,16 @@ function Profile({ currentUser }) {
           <div className="document-card">
             <h3>Documents</h3>
             <div className="card-body">
-              <label>Resume (PDF)</label>
+              <label htmlFor="file-upload" className="upload-label">
+                <span className="upload-icon">
+                  <FaUpload />
+                </span>
+                Upload Resume
+              </label>
               <input
-                type="file"
+                id="file-upload"
                 name="resume"
-                accept=".pdf"
+                type="file"
                 onChange={handleChange}
                 disabled={!editCard.documents}
               />

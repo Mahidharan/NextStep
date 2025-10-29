@@ -8,18 +8,20 @@
   margin-left: 1rem;
   border-radius: 0.8rem;
   gap: 1rem;
+  background: linear-gradient(to right, #055aaa70, #050b41b5);
 }
 
 .right-sidebar {
-  background: linear-gradient(to right, #1c3c5a70, #0f144275);
+  background: linear-gradient(to right, #021e39be, #0f1442c3);
   width: 25%;
   border-right: 1px solid #2a2a2a;
   display: flex;
   flex-direction: column;
+  padding: 1rem;
 }
 
 .search-bar {
-  padding: 10px;
+  padding: 1rem;
   border-bottom: 1px solid #2a2a2a;
 }
 
@@ -46,11 +48,11 @@
 }
 
 .user-item:hover {
-  background-color: #292929;
+  background-color: #673ada;
 }
 
 .user-item.active {
-  background-color: #3a2a4b;
+  background-color: #7f28db;
 }
 
 .user-item img {
@@ -85,7 +87,7 @@
   align-items: center;
   padding: 12px;
   border-bottom: 1px solid #2a2a2a;
-  background: linear-gradient(to right, #1c3c5a70, #0f144275);
+  background: linear-gradient(to right, #021f3adc, #040933d0);
 }
 
 .chat-header img {
@@ -116,7 +118,7 @@
 }
 
 .received {
-  background-color: #2a2a2a;
+  background-color: #0a99af;
   align-self: flex-start;
 }
 
@@ -124,7 +126,7 @@
   display: flex;
   padding: 10px;
   border-top: 1px solid #2a2a2a;
-  background-color: #1c1c1c;
+  background: linear-gradient(to right, #021f3adc, #040933d0);
 }
 
 .chat-input input {
@@ -132,7 +134,7 @@
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background: #2a2a2a;
+  background: #dcdde32f;
   color: white;
 }
 
