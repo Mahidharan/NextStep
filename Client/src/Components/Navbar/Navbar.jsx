@@ -30,7 +30,7 @@ function Navbar() {
           <FaHome className="icon" />
           <span>Home</span>
         </li>
-        <li onClick={() => handleMenuChange("/profile")}>
+        <li onClick={() => handleMenuChange("/my-profile")}>
           <FaUser className="icon" />
           <span>My Profile</span>
         </li>

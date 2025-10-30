@@ -101,7 +101,6 @@
   border-color: #6c63ff;
 }
 
-
 .document-card {
   background: linear-gradient(to right, #01244470, #00042875);
   border: 1px solid #262a3a;
@@ -174,7 +173,6 @@
   align-self: flex-end;
   margin-top: 0.8rem;
 }
-
 
 .edit-btn,
 .save-btn {
