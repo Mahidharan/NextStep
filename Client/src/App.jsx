@@ -5,6 +5,7 @@ import Profile from "./Pages/Profile/profile";
 import Login from "./Pages/Login/Login";
 import CreatePost from "./Pages/CreatePost/CreatePost";
 import Chat from "./Pages/Chat/Chat";
+import UserProfile from "./Pages/UserProfile/UserProfile";
 
 function App() {
   const posts = [
@@ -75,6 +76,8 @@ function App() {
         <Route path="/" element={<Home posts={posts} />} />
         <Route path="/post/:id" element={<PostDetails posts={posts} />} />
         <Route path="/my-profile" element={<Profile />} />
+        <Route path="/profile/:username" element={<UserProfile />} />
+
         <Route path="/login" element={<Login />}></Route>
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/chat" element={<Chat />} />

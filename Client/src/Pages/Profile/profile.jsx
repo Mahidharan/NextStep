@@ -3,6 +3,7 @@ import "./Profile.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import Avatar from "../../assets/defaultavatar.png";
 import { FaUpload } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
 
 function Profile({ currentUser }) {
   const [userData, setUserData] = useState({
@@ -12,31 +13,24 @@ function Profile({ currentUser }) {
     bio: currentUser?.bio || "",
     linkedIn: currentUser?.linkedIn || "",
     resume: null,
+    profileImg: currentUser?.profileImg || Avatar,
   });
 
-  const [editCard, setEditCard] = useState({
-    profile: false,
-    documents: false,
-    links: false,
-  });
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "resume") {
       setUserData({ ...userData, resume: files[0] });
+    } else if (name === "profileImg") {
+      const file = files[0];
+      if (file) {
+        const imageUrl = URL.createObjectURL(file);
+        setUserData({ ...userData, profileImg: imageUrl });
+      }
     } else {
       setUserData({ ...userData, [name]: value });
     }
-  };
-
-  const handleEdit = (card) => {
-    setEditCard({ ...editCard, [card]: true });
-  };
-
-  const saveEdit = (card) => {
-    console.log("Saved user details:", userData);
-    setEditCard({ ...editCard, [card]: false });
-    alert(`${card} saved successfully!`);
   };
 
   return (
@@ -44,10 +38,56 @@ function Profile({ currentUser }) {
       <Navbar />
       <div className="profile-layout">
         <aside className="profile-sidebar">
-          <img src={Avatar} alt="Profile" className="profile-avatar" />
+          <div className="profile-image-container">
+            <img
+              src={userData.profileImg}
+              alt="Profile"
+              className="profile-avatar"
+            />
+            {isEditing && (
+              <label htmlFor="profile-upload" className="change-photo-label">
+                Change Photo
+              </label>
+            )}
+            <input
+              id="profile-upload"
+              name="profileImg"
+              type="file"
+              onChange={handleChange}
+              style={{ display: "none" }}
+              disabled={!isEditing}
+            />
+          </div>
+
           <h3 className="profile-name">{userData.username || "Username"}</h3>
           <p className="profile-email">{userData.email || "Email"}</p>
-          <button className="sidebar-btn">Edit Profile</button>
+
+          <button
+            className={isEditing ? "save-btn" : "edit-btn"}
+            onClick={() => {
+              if (isEditing) {
+                toast("Saved Successfully");
+              }
+              setIsEditing(!isEditing);
+            }}
+          >
+            {isEditing ? "Save Profile" : "Edit Profile"}
+          </button>
+          <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            theme="dark"
+            toastStyle={{
+              backgroundColor: "#151823",
+              color: "#e5e5e5",
+              border: "1px solid #6c63ff",
+              borderRadius: "10px",
+              fontFamily: "Poppins",
+            }}
+          />
         </aside>
 
         <div className="profile-main">
@@ -60,8 +100,7 @@ function Profile({ currentUser }) {
                 name="fullname"
                 value={userData.fullname}
                 onChange={handleChange}
-                placeholder="Full Name"
-                disabled={!editCard.profile}
+                disabled={!isEditing}
               />
 
               <label>Email</label>
@@ -70,8 +109,7 @@ function Profile({ currentUser }) {
                 name="email"
                 value={userData.email}
                 onChange={handleChange}
-                placeholder="Email"
-                disabled={!editCard.profile}
+                disabled={!isEditing}
               />
 
               <label>Username</label>
@@ -80,8 +118,7 @@ function Profile({ currentUser }) {
                 name="username"
                 value={userData.username}
                 onChange={handleChange}
-                placeholder="Username"
-                disabled={!editCard.profile}
+                disabled={!isEditing}
               />
 
               <label>Bio</label>
@@ -90,23 +127,9 @@ function Profile({ currentUser }) {
                 name="bio"
                 value={userData.bio}
                 onChange={handleChange}
-                placeholder="Short Bio"
-                disabled={!editCard.profile}
+                disabled={!isEditing}
               />
             </div>
-
-            {!editCard.profile ? (
-              <button
-                className="edit-btn"
-                onClick={() => handleEdit("profile")}
-              >
-                Edit
-              </button>
-            ) : (
-              <button className="save-btn" onClick={() => saveEdit("profile")}>
-                Save
-              </button>
-            )}
           </div>
 
           <div className="document-card">
@@ -123,31 +146,14 @@ function Profile({ currentUser }) {
                 name="resume"
                 type="file"
                 onChange={handleChange}
-                disabled={!editCard.documents}
+                disabled={!isEditing}
               />
               {userData.resume && (
                 <p className="resume-info">Selected: {userData.resume.name}</p>
               )}
             </div>
-
-            {!editCard.documents ? (
-              <button
-                className="edit-btn"
-                onClick={() => handleEdit("documents")}
-              >
-                Edit
-              </button>
-            ) : (
-              <button
-                className="save-btn"
-                onClick={() => saveEdit("documents")}
-              >
-                Save
-              </button>
-            )}
           </div>
 
-          {/* Links Card */}
           <div className="profile-card">
             <h3>Links</h3>
             <div className="card-body">
@@ -157,20 +163,10 @@ function Profile({ currentUser }) {
                 name="linkedIn"
                 placeholder="Enter LinkedIn URL"
                 value={userData.linkedIn}
-                disabled={!editCard.links}
+                disabled={!isEditing}
                 onChange={handleChange}
               />
             </div>
-
-            {!editCard.links ? (
-              <button className="edit-btn" onClick={() => handleEdit("links")}>
-                Edit
-              </button>
-            ) : (
-              <button className="save-btn" onClick={() => saveEdit("links")}>
-                Save
-              </button>
-            )}
           </div>
         </div>
       </div>

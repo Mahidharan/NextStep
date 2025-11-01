@@ -17,7 +17,11 @@ function PostCard({ post }) {
   return (
     <div className="post-card">
       <div className="userinfo">
-        <img src={post.userAvatar} alt="elango avatar" />
+        <img
+          src={post.userAvatar}
+          alt="elango avatar"
+          onClick={() => changePage(`profile/${post.username}`)}
+        />
         <div className="uname-company">
           <h3>{post.username}</h3>
           <p> {post.company} </p>
