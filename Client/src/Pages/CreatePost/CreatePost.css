@@ -140,3 +140,38 @@ textarea:focus {
   transform: translateY(-2px);
   box-shadow: 0 0 12px rgba(139, 92, 246, 0.6);
 }
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .upload-image {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .upload-image img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  textarea {
+    padding: 1.5rem;
+  }
+
+  .btns {
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .post-btn {
+    width: 80%;
+  }
+}

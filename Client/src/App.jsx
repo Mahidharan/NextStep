@@ -1,14 +1,16 @@
 import Home from "./Pages/Home/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PostDetails from "./Pages/PostDetails/PostDetails";
-import Profile from "./Pages/Profile/profile";
+import Profile from "./Pages/Profile/Profile";
 import Login from "./Pages/Login/Login";
 import CreatePost from "./Pages/CreatePost/CreatePost";
 import Chat from "./Pages/Chat/Chat";
 import UserProfile from "./Pages/UserProfile/UserProfile";
+import { useState } from "react";
 
 function App() {
-  const posts = [
+
+  const [posts,setPosts] = useState([
     {
       id: 1,
       username: "Elango",
@@ -69,7 +71,8 @@ function App() {
         { username: "Bruce", text: "Great Experience" },
       ],
     },
-  ];
+  ])
+
   return (
     <Router>
       <Routes>
@@ -79,7 +82,10 @@ function App() {
         <Route path="/profile/:username" element={<UserProfile />} />
 
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/create-post" element={<CreatePost />} />
+        <Route
+          path="/create-post"
+          element={<CreatePost setPosts={setPosts} />}
+        />
         <Route path="/chat" element={<Chat />} />
       </Routes>
     </Router>

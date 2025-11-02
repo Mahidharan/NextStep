@@ -6,8 +6,9 @@ import { BsArrowBarLeft } from "react-icons/bs";
 import { FaPaperPlane } from "react-icons/fa";
 import { FaUpload } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
-function CreatePost() {
+function CreatePost({ setPosts }) {
   const navigate = useNavigate();
 
   const change = (page) => {
@@ -39,7 +40,24 @@ function CreatePost() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(postData, image);
+
+    if (!postData.company || !postData.experience || !preview) {
+      toast.error("Please fill all fields and upload an image.");
+    }
+
+    const newPost = {
+      id: Date.now(),
+      username: " FRIDAY",
+      company: postData.company,
+      experience: postData.experience,
+      userAvatar: "/defaultavatar.png",
+      postImage: preview,
+      comments: [],
+    };
+    setPosts((prev) => [newPost, ...prev]);
+    toast.success("Shared Successfully 🎉");
+
+    setTimeout(() => navigate("/"), 1200);
   };
 
   return (
@@ -61,12 +79,14 @@ function CreatePost() {
               type="text"
               value={postData.company}
               onChange={handleChange}
+              required={true}
             />
             <label>Experience</label>
             <textarea
               name="experience"
               value={postData.experience}
               onChange={handleChange}
+              required={true}
             ></textarea>
           </div>
           <div className="upload-image">
@@ -81,6 +101,7 @@ function CreatePost() {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
+              required={true}
             />
 
             {preview && (
@@ -101,6 +122,7 @@ function CreatePost() {
             <button type="submit" className="post-btn">
               <FaPaperPlane /> Post
             </button>
+            <ToastContainer />
           </div>
         </form>
       </div>

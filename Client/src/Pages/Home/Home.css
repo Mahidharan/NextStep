@@ -1,6 +1,7 @@
 .home {
   margin-top: 90px; /* same as navbar height */
   padding: 0 30px;
+  width: 89%;
 }
 
 .post-grid {
@@ -9,4 +10,9 @@
   display: grid;
   grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
   gap: 20px;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* Optional: make scrollbar invisible */
 }

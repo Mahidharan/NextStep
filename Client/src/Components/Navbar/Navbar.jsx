@@ -1,21 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../../assets/logo.jpeg";
 import UserIcon from "../../assets/usericon.jpg";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { IoIosCreate } from "react-icons/io";
-import { FaHome } from "react-icons/fa";
-import { FaUser } from "react-icons/fa";
+import { FaHome, FaUser, FaTimes } from "react-icons/fa";
 import { BsFillChatLeftFill } from "react-icons/bs";
 import { FiLogOut } from "react-icons/fi";
+import { RiMenu3Fill } from "react-icons/ri";
 
 function Navbar() {
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleMenuChange = (page) => {
     if (!page) return;
-
     navigate(page);
+    setMenuOpen(false);
   };
 
   return (
@@ -25,7 +26,7 @@ function Navbar() {
         <h1 className="title">NextStep</h1>
       </div>
 
-      <ul className="nav-links">
+      <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
         <li onClick={() => handleMenuChange("/")}>
           <FaHome className="icon" />
           <span>Home</span>
@@ -38,6 +39,10 @@ function Navbar() {
           <BsFillChatLeftFill className="icon" />
           <span>Chat</span>
         </li>
+        <li onClick={() => handleMenuChange("/create-post")}>
+          <IoIosCreate className="icon" />
+          <span>Create Post</span>
+        </li>
         <li className="logout">
           <FiLogOut className="icon" />
           <span>Log Out</span>
@@ -45,14 +50,9 @@ function Navbar() {
       </ul>
 
       <div className="nav-right">
-        <button
-          className="create-post-btn"
-          onClick={() => handleMenuChange("/create-post")}
-        >
-          <IoIosCreate className="icon" />
-          <span>Create Post</span>
-        </button>
-
+        <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <FaTimes /> : <RiMenu3Fill />}
+        </div>
         <img src={UserIcon} alt="User" className="profile-img" />
       </div>
     </nav>

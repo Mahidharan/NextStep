@@ -11,6 +11,7 @@ function UserProfile() {
     email: "elango@example.com",
     bio: "Frontend Developer | Tech Enthusiast",
     linkedIn: "https://linkedin.com/in/elango",
+    resume: "https://exampleresume.com",
     profileImg: Avatar,
   });
 
@@ -48,13 +49,18 @@ function UserProfile() {
             <a href={user.linkedIn} className="linkedin-link">
               View LinkedIn
             </a>
+            {user.resume && (
+              <a href={user.resume} className="resume-link">
+                View Resume
+              </a>
+            )}
           </div>
         </div>
         <div className="user-posts-section">
           <h3> {user.username} </h3>
           <div className="user-posts">
             {post.map((posts) => (
-              <PostCard key={post.id} post={posts} />
+              <PostCard key={posts.id} post={posts} />
             ))}
           </div>
         </div>
