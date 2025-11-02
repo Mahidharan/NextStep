@@ -1,7 +1,8 @@
 .home {
   margin-top: 90px; /* same as navbar height */
   padding: 0 30px;
-  width: 89%;
+  width: 82.5%;
+  height: 100vh;
 }
 
 .post-grid {
