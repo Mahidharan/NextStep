@@ -36,7 +36,6 @@
   letter-spacing: 0.5px;
 }
 
-/* Desktop Nav Links */
 .nav-links {
   display: flex;
   list-style: none;
@@ -102,10 +101,9 @@
   color: #d8b4fe;
 }
 
-/* Mobile View */
 @media (max-width: 900px) {
   .nav-links {
-    display: none; /* hidden by default */
+    display: none; 
     position: absolute;
     top: 65px;
     right: 0;
@@ -120,7 +118,6 @@
     gap: 0.8rem;
   }
 
-  /* 👇 this is the key — when .open is added */
   .nav-links.open {
     display: flex;
     animation: slideDown 0.3s ease forwards;

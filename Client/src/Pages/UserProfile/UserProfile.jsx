@@ -46,11 +46,21 @@ function UserProfile() {
             <h2>{user.fullname}</h2>
             <p className="username">@{user.username}</p>
             <p className="bio"> {user.bio} </p>
-            <a href={user.linkedIn} className="linkedin-link">
+            <a
+              href={user.linkedIn}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="linkedin-link"
+            >
               View LinkedIn
             </a>
             {user.resume && (
-              <a href={user.resume} className="resume-link">
+              <a
+                href={user.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="resume-link"
+              >
                 View Resume
               </a>
             )}
