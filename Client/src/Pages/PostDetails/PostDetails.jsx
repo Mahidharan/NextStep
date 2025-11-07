@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
-import "./Postdetails.css";
+import "./PostDetails.css";
 
 function PostDetails({ posts }) {
   const { id } = useParams();
