@@ -6,8 +6,11 @@
 }
 
 body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
   background: radial-gradient(circle at center, #0b063f, #020024 80%);
   color: #fff;
-  margin: 0;
   font-family: "Poppins", sans-serif;
 }
