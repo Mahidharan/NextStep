@@ -1,5 +1,5 @@
 .home {
-  margin-top: 90px; /* same as navbar height */
+  margin-top: 90px; 
   padding: 0 30px;
   width: 82.5%;
   height: 100vh;
@@ -15,5 +15,5 @@
 
 ::-webkit-scrollbar {
   width: 0px;
-  background: transparent; /* Optional: make scrollbar invisible */
+  background: transparent; 
 }
