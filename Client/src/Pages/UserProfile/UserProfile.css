@@ -2,7 +2,6 @@
   color: #e5e5e5;
   padding: 6rem 2rem 2rem;
   min-height: 100vh;
-  background: linear-gradient(to bottom right, #0b063f, #020024);
   font-family: "Poppins", sans-serif;
 }
 
@@ -87,5 +86,3 @@
   flex-direction: column;
   gap: 1.5rem;
 }
-
-

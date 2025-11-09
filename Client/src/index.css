@@ -8,16 +8,11 @@
 html,
 body {
   height: 100%;
-  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
   background: radial-gradient(circle at center, #0b063f, #020024 80%);
   color: #fff;
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
-}
-
-#root {
-  background: radial-gradient(circle at center, #0b063f, #020024 80%);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
