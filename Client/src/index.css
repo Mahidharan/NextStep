@@ -11,8 +11,10 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  background: radial-gradient(circle at center, #0b063f, #020024 80%);
-  color: #fff;
+  background: url("./assets/blue.jpeg");
+
+  /* background: radial-gradient(circle at center, #0b063f, #020024 80%); */
+  color: black;
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
 }
