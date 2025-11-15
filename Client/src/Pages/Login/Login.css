@@ -40,47 +40,6 @@
   border: 1px solid rgb(145, 145, 248);
 }
 
-/* @property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-.outside-card::after,
-.outside-card::before {
-  content: "";
-  position: absolute;
-  top: 61.3%;
-  left: 50%;
-  width: 38.9%;
-  height: 65.9%;
-  translate: -50% -50%;
-  z-index: -1;
-  padding: 3px;
-  border-radius: 10px;
-  background-image: conic-gradient(
-    from var(--angle),
-    transparent 10%,
-    red,
-    rgb(13, 103, 182)
-  );
-  animation: 3s spin linear infinite;
-}
-
-@keyframes spin {
-  from {
-    --angle: 0deg;
-  }
-  to {
-    --angle: 360deg;
-  }
-}
-
-.outside-card::before {
-  filter: blur(1.5rem);
-  opacity: 0.7;
-} */
-
 .inside-card {
   background-color: #e7e9ea0c;
   padding: 3rem;

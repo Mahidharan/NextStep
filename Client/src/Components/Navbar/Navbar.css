@@ -2,7 +2,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(90deg, #0b063f, #1a104f);
+  background-image: linear-gradient(
+    to right bottom,
+    #06023f,
+    #080843,
+    #0c0d46,
+    #11114a,
+    #15154e,
+    #14164d,
+    #13164c,
+    #12174b,
+    #0c1545,
+    #07123f,
+    #030f3a,
+    #020a34
+  );
   padding: 0.8rem 2rem;
   box-shadow: 0 2px 10px rgba(139, 92, 246, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);

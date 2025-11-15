@@ -1,11 +1,11 @@
 .post-card {
   border: 1px solid rgba(139, 92, 246, 0.2);
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.25);
   width: min(100%, 700px);
   padding: 1rem;
   border-radius: 1rem;
   box-sizing: border-box;
   transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+  background-color: #001634;
 }
 
 .post-card:hover {

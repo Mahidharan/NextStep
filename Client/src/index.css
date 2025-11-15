@@ -7,14 +7,26 @@
 
 html,
 body {
+  color: white;
   height: 100%;
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  background: url("./assets/blue.jpeg");
-
-  /* background: radial-gradient(circle at center, #0b063f, #020024 80%); */
-  color: black;
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
+  background: linear-gradient(
+    to right bottom,
+    #06023f,
+    #080843,
+    #0c0d46,
+    #11114a,
+    #15154e,
+    #14164d,
+    #13164c,
+    #12174b,
+    #0c1545,
+    #07123f,
+    #030f3a,
+    #020a34
+  );
 }
