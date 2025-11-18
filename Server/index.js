@@ -1,1 +1,1 @@
-console.log("starting server");
+console.log("starting server in nodemon");
