@@ -3,6 +3,7 @@ import { ApiResponse } from "../Utils/api-response.js";
 import { ApiError } from "../Utils/api-error.js";
 import { User } from "../Models/user.models.js";
 
+//Registering User
 const googleLogin = asyncHandler(async (req, res) => {
   const { googleId, avatar, email, name } = req.body;
 
@@ -27,6 +28,7 @@ const googleLogin = asyncHandler(async (req, res) => {
     .json(new ApiResponse(201, user, "User LoggedIn succcessfully"));
 });
 
+//getting user details
 const getUser = asyncHandler(async (req, res) => {
   const userId = req.params.id;
 
@@ -41,6 +43,7 @@ const getUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, user, "User fetched successfully"));
 });
 
+//updating user details
 const updateUser = asyncHandler(async (req, res) => {
   const { name, bio, linkedIn, resumeUrl, email } = req.body;
 
@@ -69,6 +72,7 @@ const updateUser = asyncHandler(async (req, res) => {
     );
 });
 
+//uploading resume
 const uploadResume = asyncHandler(async (req, res) => {
   const userId = req.params.id;
 
