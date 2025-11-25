@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import userRoutes from "./Routes/userRoutes.js";
+import postRoutes from "./Routes/postRoutes.js";
 
 const app = express();
 
@@ -17,6 +19,10 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
+
+//Routing
+app.use("/api/user", userRoutes);
+app.use("/api/post", postRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to nextstep");

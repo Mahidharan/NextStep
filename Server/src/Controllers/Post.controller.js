@@ -48,7 +48,7 @@ const addComment = asyncHandler(async (req, res) => {
   if (!userId || !username || !text) {
     throw new ApiError(400, "All comment fields are required");
   }
-  const post = await Post.findById(id);
+  let post = await Post.findById(id);
   if (!post) {
     throw new ApiError(404, "Post Not Found");
   }
