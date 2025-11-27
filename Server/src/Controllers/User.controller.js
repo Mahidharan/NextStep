@@ -95,4 +95,27 @@ const uploadResume = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, user, "Resume Uploaded successfully"));
 });
 
-export { googleLogin, getUser, updateUser, uploadResume };
+//Avatar Uploading
+const uploadAvatar = asyncHandler(async (req, res) => {
+  const userId = req.params.id;
+
+  if (!req.file) {
+    throw new ApiError(404, "Image Not found");
+  }
+
+  const imageUrl = `/uploads/${req.file.filename}`;
+
+  const updateUser = await User.findByIdAndUpdate(
+    userId,
+    {
+      avatar: { url: imageUrl },
+    },
+    { new: true },
+  );
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, updateUser, "Avatar Uploaded Successfully"));
+});
+
+export { googleLogin, getUser, updateUser, uploadResume, uploadAvatar };

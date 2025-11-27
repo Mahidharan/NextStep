@@ -10,11 +10,15 @@ const createPost = asyncHandler(async (req, res) => {
   if (!userId || !username || !company || !experience) {
     throw new ApiError(400, "All Fields are required ");
   }
+
+  const imageUrl = req.file ? req.file.path : null;
+
   const post = await Post.create({
     userId,
     username,
     company,
     experience: experience,
+    image: imageUrl,
   });
 
   if (!post) {
