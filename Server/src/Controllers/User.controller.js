@@ -3,6 +3,7 @@ import { ApiResponse } from "../Utils/api-response.js";
 import { ApiError } from "../Utils/api-error.js";
 import { User } from "../Models/user.models.js";
 import { uploadCloudinary } from "../Utils/cloudinary.js";
+import fs from "fs";
 
 //Registering User
 const googleLogin = asyncHandler(async (req, res) => {
@@ -78,16 +79,19 @@ const updateUser = asyncHandler(async (req, res) => {
 const uploadResume = asyncHandler(async (req, res) => {
   const userId = req.params.id;
 
-  //Later Integration
-  const fileUrl = req.file?.path;
-
-  if (!fileUrl) {
+  if (!req.file) {
     throw new ApiError(400, "Resume file not found");
   }
 
+  const cloudUrl = await uploadCloudinary(req.file.path);
+
+  if (!cloudUrl) {
+    throw new ApiError(400, "Resume upload failed");
+  }
+
   const user = await User.findByIdAndUpdate(
-    req.body?.userId,
-    { resumeUrl: fileUrl },
+    userId,
+    { resumeUrl: cloudUrl },
     { new: true },
   );
 
