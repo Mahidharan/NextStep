@@ -2,6 +2,7 @@ import { Post } from "../Models/postModel.js";
 import { asyncHandler } from "../Utils/asyncHandler.js";
 import { ApiError } from "../Utils/api-error.js";
 import { ApiResponse } from "../Utils/api-response.js";
+import { uploadCloudinary } from "../Utils/cloudinary.js";
 
 //Creating Post
 const createPost = asyncHandler(async (req, res) => {
@@ -11,7 +12,17 @@ const createPost = asyncHandler(async (req, res) => {
     throw new ApiError(400, "All Fields are required ");
   }
 
-  const imageUrl = req.file ? req.file.path : null;
+  let imageUrl = null;
+
+  if (req.file) {
+    const cloudinaryFile = await uploadCloudinary(req.file.path);
+
+    if (!cloudinaryFile) {
+      throw new ApiError(400, "Post Image Upload failed");
+    }
+
+    imageUrl = cloudinaryFile.secure_url;
+  }
 
   const post = await Post.create({
     userId,

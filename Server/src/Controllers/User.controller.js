@@ -2,6 +2,7 @@ import { asyncHandler } from "../Utils/asyncHandler.js";
 import { ApiResponse } from "../Utils/api-response.js";
 import { ApiError } from "../Utils/api-error.js";
 import { User } from "../Models/user.models.js";
+import { uploadCloudinary } from "../Utils/cloudinary.js";
 
 //Registering User
 const googleLogin = asyncHandler(async (req, res) => {
@@ -103,12 +104,16 @@ const uploadAvatar = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Image Not found");
   }
 
-  const imageUrl = `/uploads/${req.file.filename}`;
+  const cloudUrl = await uploadCloudinary(req.file.path);
+
+  if (!cloudUrl) {
+    throw new ApiError(400, "Failed to upload image");
+  }
 
   const updateUser = await User.findByIdAndUpdate(
     userId,
     {
-      avatar: { url: imageUrl },
+      avatar: { url: cloudUrl },
     },
     { new: true },
   );
