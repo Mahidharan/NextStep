@@ -13,18 +13,19 @@ const googleLogin = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Mail is required");
   }
 
-  let user = await User.findOne({ googleId });
 
-  if (!user) {
-    user = await User.create({
-      googleId,
-      name,
-      email,
-      avatar: {
-        url: avatar || "https://placehold.co/200x200",
-      },
-    });
-  }
+  const  user = await User.findOne({ googleId: payload.sub });
+
+if(!user){
+  user = User.create({
+    googleId: payload.sub,
+    name: payload.name,
+    email: payload.email,
+    avatar: { url: payload.picture }
+  });
+}
+
+  
   return res
     .status(200)
     .json(new ApiResponse(201, user, "User LoggedIn succcessfully"));
