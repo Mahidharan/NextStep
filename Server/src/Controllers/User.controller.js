@@ -3,47 +3,42 @@ import { ApiResponse } from "../Utils/api-response.js";
 import { ApiError } from "../Utils/api-error.js";
 import { User } from "../Models/user.models.js";
 import { uploadCloudinary } from "../Utils/cloudinary.js";
-import fs from "fs";
+import { verifyGoogleToken } from "../Config/googleAuth.js";
+
 
 //Registering User
 const googleLogin = asyncHandler(async (req, res) => {
-  const { googleId, avatar, email, name } = req.body;
+  const { token } = req.body;
 
-  if (!googleId || !email) {
-    throw new ApiError(400, "Mail is required");
+  if (!token) {
+    throw new ApiError(400, "Google token missing");
   }
 
+  const payload = await verifyGoogleToken(token);
 
-  const  user = await User.findOne({ googleId: payload.sub });
+  if (!payload) {
+    throw new ApiError(401, "Invalid Google token");
+  }
 
-if(!user){
-  user = User.create({
-    googleId: payload.sub,
-    name: payload.name,
-    email: payload.email,
-    avatar: { url: payload.picture }
-  });
-}
+  const googleId = payload.sub;
+  const email = payload.email;
+  const name = payload.name;
+  const avatar = payload.picture;
 
-  
-  return res
-    .status(200)
-    .json(new ApiResponse(201, user, "User LoggedIn succcessfully"));
-});
-
-//getting user details
-const getUser = asyncHandler(async (req, res) => {
-  const userId = req.params.id;
-
-  const user = await User.findById(userId);
+  let user = await User.findOne({ googleId });
 
   if (!user) {
-    throw new ApiError(404, "User Not Found");
+    user = await User.create({
+      googleId,
+      name,
+      email,
+      avatar: { url: avatar },
+    });
   }
 
   return res
     .status(200)
-    .json(new ApiResponse(200, user, "User fetched successfully"));
+    .json(new ApiResponse(200, user, "User Logged In Successfully"));
 });
 
 //updating user details

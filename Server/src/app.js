@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import userRoutes from "./Routes/userRoutes.js";
 import postRoutes from "./Routes/postRoutes.js";
-import passport from "./Config/googleAuth.js";
 
 const app = express();
 
@@ -21,7 +20,6 @@ app.use(
   }),
 );
 
-app.use(passport.initialize());
 
 //Routing
 app.use("/api/user", userRoutes);

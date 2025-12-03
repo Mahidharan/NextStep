@@ -11,8 +11,7 @@ export const verifyGoogleToken = async (token) => {
       audience: process.env.GOOGLE_CLIENT_ID,
     });
 
-    const payload = ticket.getPayload();
-    return payload;
+    return ticket.getPayload();
   } catch (err) {
     console.error("Google token verification error:", err);
     return null;
