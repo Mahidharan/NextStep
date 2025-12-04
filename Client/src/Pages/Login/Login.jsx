@@ -1,6 +1,7 @@
 import React from "react";
 import "./Login.css";
 import Logo from "../../assets/logo.jpg";
+import { FcGoogle } from "react-icons/fc";
 
 function Login() {
   return (
@@ -16,7 +17,10 @@ function Login() {
         <div className="inside-card">
           <img src={Logo} alt="" />
           <p>Share, Learn, and Grow Together</p>
-          <button className="login-btn"> Continue With Google</button>
+          <button className="login-btn">
+            <FcGoogle />
+            Continue With Google
+          </button>
           <p className="terms">
             By continuing, you agree to our <span>Terms of service </span> and
             <span> Privacy Policy</span>

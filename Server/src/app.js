@@ -2,7 +2,8 @@ import express from "express";
 import cors from "cors";
 import userRoutes from "./Routes/userRoutes.js";
 import postRoutes from "./Routes/postRoutes.js";
-
+import passport from "./Config/googleAuth.js";
+import session from "express-session";
 const app = express();
 
 //Basic configuration
@@ -20,6 +21,16 @@ app.use(
   }),
 );
 
+app.use(
+  session({
+    secret: "NEXTSTEP_SECRET",
+    resave: false,
+    saveUninitialized: false,
+  }),
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Routing
 app.use("/api/user", userRoutes);

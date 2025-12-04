@@ -3,42 +3,20 @@ import { ApiResponse } from "../Utils/api-response.js";
 import { ApiError } from "../Utils/api-error.js";
 import { User } from "../Models/user.models.js";
 import { uploadCloudinary } from "../Utils/cloudinary.js";
-import { verifyGoogleToken } from "../Config/googleAuth.js";
 
+// Get User
+const getUser = asyncHandler(async (req, res) => {
+  const userId = req.params.id;
 
-//Registering User
-const googleLogin = asyncHandler(async (req, res) => {
-  const { token } = req.body;
-
-  if (!token) {
-    throw new ApiError(400, "Google token missing");
-  }
-
-  const payload = await verifyGoogleToken(token);
-
-  if (!payload) {
-    throw new ApiError(401, "Invalid Google token");
-  }
-
-  const googleId = payload.sub;
-  const email = payload.email;
-  const name = payload.name;
-  const avatar = payload.picture;
-
-  let user = await User.findOne({ googleId });
+  const user = await User.findById(userId);
 
   if (!user) {
-    user = await User.create({
-      googleId,
-      name,
-      email,
-      avatar: { url: avatar },
-    });
+    throw new ApiError(404, "User not found");
   }
 
   return res
     .status(200)
-    .json(new ApiResponse(200, user, "User Logged In Successfully"));
+    .json(new ApiResponse(200, user, "User fetched successfully"));
 });
 
 //updating user details
@@ -123,4 +101,4 @@ const uploadAvatar = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, updateUser, "Avatar Uploaded Successfully"));
 });
 
-export { googleLogin, getUser, updateUser, uploadResume, uploadAvatar };
+export { getUser, updateUser, uploadResume, uploadAvatar };
