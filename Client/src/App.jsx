@@ -7,10 +7,10 @@ import CreatePost from "./Pages/CreatePost/CreatePost";
 import Chat from "./Pages/Chat/Chat";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import { useState } from "react";
+import AuthSuccess from "./Pages/AuthSuccess.jsx";
 
 function App() {
-
-  const [posts,setPosts] = useState([
+  const [posts, setPosts] = useState([
     {
       id: 1,
       username: "Elango",
@@ -71,7 +71,7 @@ function App() {
         { username: "Bruce", text: "Great Experience" },
       ],
     },
-  ])
+  ]);
 
   return (
     <Router>
@@ -87,6 +87,8 @@ function App() {
           element={<CreatePost setPosts={setPosts} />}
         />
         <Route path="/chat" element={<Chat />} />
+
+        <Route path="/auth-success" element={<AuthSuccess />} />
       </Routes>
     </Router>
   );

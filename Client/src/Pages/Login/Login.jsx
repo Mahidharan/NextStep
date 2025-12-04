@@ -17,7 +17,12 @@ function Login() {
         <div className="inside-card">
           <img src={Logo} alt="" />
           <p>Share, Learn, and Grow Together</p>
-          <button className="login-btn">
+          <button
+            className="login-btn"
+            onClick={() => {
+              window.location.href = "http://localhost:8000/api/user/google";
+            }}
+          >
             <FcGoogle />
             Continue With Google
           </button>
