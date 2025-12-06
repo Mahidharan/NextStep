@@ -7,7 +7,7 @@ import CreatePost from "./Pages/CreatePost/CreatePost";
 import Chat from "./Pages/Chat/Chat";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import { useState } from "react";
-import AuthSuccess from "./Pages/AuthSuccess.jsx";
+import AuthSuccess from "./Pages/Auth/AuthSuccess.jsx";
 
 function App() {
   const [posts, setPosts] = useState([

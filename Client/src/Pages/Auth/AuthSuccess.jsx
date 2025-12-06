@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../Context/AuthContext"; 
+import { useAuth } from "../../Context/AuthContext.jsx";
+import "./AuthSuccess.css";
 
 function AuthSuccess() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { login } = useAuth(); 
+  const { login } = useAuth();
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -17,18 +18,21 @@ function AuthSuccess() {
 
         login(user);
 
-        navigate("/");
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       } catch (err) {
         console.error("Error parsing user", err);
       }
     } else {
       navigate("/login");
     }
-  }, [location, navigate, login]);
+  }, []);
 
   return (
-    <div>
-      <h2>Logging You In...</h2>
+    <div className="auth-loader">
+      <div className="loader-circle"></div>
+      <p>Logging You In...</p>
     </div>
   );
 }
