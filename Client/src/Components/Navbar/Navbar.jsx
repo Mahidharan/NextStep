@@ -8,6 +8,7 @@ import { FaHome, FaUser, FaTimes } from "react-icons/fa";
 import { BsFillChatLeftFill } from "react-icons/bs";
 import { FiLogOut } from "react-icons/fi";
 import { RiMenu3Fill } from "react-icons/ri";
+import { useAuth } from "../../Context/AuthContext";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ function Navbar() {
     navigate(page);
     setMenuOpen(false);
   };
+
+  const { user, logout } = useAuth();
 
   return (
     <nav className="navbar">
@@ -43,7 +46,7 @@ function Navbar() {
           <IoIosCreate className="icon" />
           <span>Create Post</span>
         </li>
-        <li className="logout">
+        <li className="logout" onClick={logout}>
           <FiLogOut className="icon" />
           <span>Log Out</span>
         </li>
@@ -53,7 +56,11 @@ function Navbar() {
         <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <FaTimes /> : <RiMenu3Fill />}
         </div>
-        <img src={UserIcon} alt="User" className="profile-img" />
+        <img
+          src={user?.avatar?.url || UserIcon}
+          alt="User"
+          className="profile-img"
+        />
       </div>
     </nav>
   );
