@@ -4,6 +4,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import Avatar from "../../assets/defaultavatar.png";
 import { FaUpload } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
+import { useAuth } from "../../Context/AuthContext";
 
 function Profile({ currentUser }) {
   const [userData, setUserData] = useState({
@@ -33,6 +34,8 @@ function Profile({ currentUser }) {
     }
   };
 
+  const { user } = useAuth();
+
   return (
     <>
       <Navbar />
@@ -40,7 +43,7 @@ function Profile({ currentUser }) {
         <aside className="profile-sidebar">
           <div className="profile-image-container">
             <img
-              src={userData.profileImg}
+              src={user?.avatar?.url || userData.profileImg}
               alt="Profile"
               className="profile-avatar"
             />

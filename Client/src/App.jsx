@@ -8,6 +8,7 @@ import Chat from "./Pages/Chat/Chat";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import { useState } from "react";
 import AuthSuccess from "./Pages/Auth/AuthSuccess.jsx";
+import ProtectedRoutes from "./Components/ProtectedRoutes.jsx";
 
 function App() {
   const [posts, setPosts] = useState([
@@ -76,19 +77,60 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home posts={posts} />} />
-        <Route path="/post/:id" element={<PostDetails posts={posts} />} />
-        <Route path="/my-profile" element={<Profile />} />
-        <Route path="/profile/:username" element={<UserProfile />} />
-
+        {/* Public Routes */}
+        <Route path="/auth-success" element={<AuthSuccess />} />
         <Route path="/login" element={<Login />}></Route>
+
+        {/* ProtectedRoutes */}
+        <Route
+          path="/"
+          element={
+            <ProtectedRoutes>
+              <Home posts={posts} />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/post/:id"
+          element={
+            <ProtectedRoutes>
+              <PostDetails posts={posts} />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/my-profile"
+          element={
+            <ProtectedRoutes>
+              <Profile />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/profile/:username"
+          element={
+            <ProtectedRoutes>
+              <UserProfile />
+            </ProtectedRoutes>
+          }
+        />
+
         <Route
           path="/create-post"
-          element={<CreatePost setPosts={setPosts} />}
+          element={
+            <ProtectedRoutes>
+              <CreatePost setPosts={setPosts} />
+            </ProtectedRoutes>
+          }
         />
-        <Route path="/chat" element={<Chat />} />
-
-        <Route path="/auth-success" element={<AuthSuccess />} />
+        <Route
+          path="/chat"
+          element={
+            <ProtectedRoutes>
+              <Chat />
+            </ProtectedRoutes>
+          }
+        />
       </Routes>
     </Router>
   );

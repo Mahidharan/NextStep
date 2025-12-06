@@ -32,7 +32,7 @@ function AuthSuccess() {
   return (
     <div className="auth-loader">
       <div className="loader-circle"></div>
-      <p>Logging You In...</p>
+      <p>Loading...</p>
     </div>
   );
 }
