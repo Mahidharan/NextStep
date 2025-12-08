@@ -7,6 +7,8 @@ import { FaPaperPlane } from "react-icons/fa";
 import { FaUpload } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { api } from "../../API/axios";
+import { useAuth } from "../../Context/AuthContext";
 
 function CreatePost({ setPosts }) {
   const navigate = useNavigate();
@@ -38,26 +40,18 @@ function CreatePost({ setPosts }) {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const { user } = useAuth();
 
-    if (!postData.company || !postData.experience || !preview) {
-      toast.error("Please fill all fields and upload an image.");
+  const handleSubmit = async (e) => {
+    try {
+      const res = await api.post("post/create", {
+        username: user.name,
+        company,
+        experience,
+      });
+    } catch (error) {
+      console.log(error);
     }
-
-    const newPost = {
-      id: Date.now(),
-      username: " FRIDAY",
-      company: postData.company,
-      experience: postData.experience,
-      userAvatar: "/defaultavatar.png",
-      postImage: preview,
-      comments: [],
-    };
-    setPosts((prev) => [newPost, ...prev]);
-    toast.success("Shared Successfully 🎉");
-
-    setTimeout(() => navigate("/"), 1200);
   };
 
   return (
