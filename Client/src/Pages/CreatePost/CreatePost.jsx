@@ -43,14 +43,32 @@ function CreatePost({ setPosts }) {
   const { user } = useAuth();
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!user || !user._id) {
+      toast.error("User Not found");
+      return;
+    }
+
     try {
-      const res = await api.post("post/create", {
-        username: user.name,
-        company,
-        experience,
+      const formData = new FormData();
+      formData.append("userId", user._id);
+      formData.append("username", user.name);
+      formData.append("company", postData.company);
+      formData.append("experience", postData.experience);
+
+      if (image) {
+        formData.append("image", image);
+      }
+
+      const res = await api.post("post/create", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
+      toast.success("Post created successfully");
+      setTimeout(() => navigate("/"), 2000);
     } catch (error) {
       console.log(error);
+      toast.error("Failed to create post");
     }
   };
 

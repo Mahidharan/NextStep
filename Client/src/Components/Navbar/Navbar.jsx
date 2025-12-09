@@ -20,7 +20,8 @@ function Navbar() {
     setMenuOpen(false);
   };
 
-  const { user, logout } = useAuth();
+  const { user, logout, loading } = useAuth();
+  if (loading) return null;
 
   return (
     <nav className="navbar">
@@ -57,7 +58,8 @@ function Navbar() {
           {menuOpen ? <FaTimes /> : <RiMenu3Fill />}
         </div>
         <img
-          src={user?.avatar?.url || UserIcon}
+          src={user?.avatar?.url}
+          onError={(e) => (e.target.src = UserIcon)}
           alt="User"
           className="profile-img"
         />
