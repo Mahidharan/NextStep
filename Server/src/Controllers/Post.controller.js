@@ -21,7 +21,7 @@ const createPost = asyncHandler(async (req, res) => {
       throw new ApiError(400, "Post Image Upload failed");
     }
 
-    imageUrl = cloudinaryFile.secure_url;
+    imageUrl = cloudinaryFile;
   }
 
   const post = await Post.create({

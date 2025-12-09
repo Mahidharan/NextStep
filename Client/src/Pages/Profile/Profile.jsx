@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import Avatar from "../../assets/defaultavatar.png";
 import { FaUpload } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import { useAuth } from "../../Context/AuthContext";
+import { api } from "../../API/axios.js";
 
 function Profile({ currentUser }) {
   const [userData, setUserData] = useState({
@@ -33,8 +34,26 @@ function Profile({ currentUser }) {
       setUserData({ ...userData, [name]: value });
     }
   };
-
   const { user } = useAuth();
+
+  useEffect(() => {
+    if (!user?._id) return;
+    api
+      .get(`/user/profile/${user._id}`)
+      .then((res) => {
+        const fetchedUser = res.data.data;
+        setUserData({
+          fullname: fetchedUser.name || "",
+          username: fetchedUser.name || "",
+          email: fetchedUser.email || "",
+          bio: fetchedUser.bio || "",
+          linkedIn: fetchedUser.linkedIn || "",
+          resume: null,
+          profileImg: fetchedUser.avatar?.url || Avatar,
+        });
+      })
+      .catch((err) => console.log(err));
+  }, [user]);
 
   return (
     <>

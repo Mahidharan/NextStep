@@ -56,10 +56,7 @@ function CreatePost({ setPosts }) {
       formData.append("username", user.name);
       formData.append("company", postData.company);
       formData.append("experience", postData.experience);
-
-      if (image) {
-        formData.append("image", image);
-      }
+      formData.append("postImage", image);
 
       const res = await api.post("post/create", formData, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -109,6 +106,7 @@ function CreatePost({ setPosts }) {
               Upload Image
             </label>
             <input
+              name="postImage"
               id="file-upload"
               type="file"
               accept="image/*"
