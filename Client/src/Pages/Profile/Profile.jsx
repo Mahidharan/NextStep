@@ -7,16 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { useAuth } from "../../Context/AuthContext";
 import { api } from "../../API/axios.js";
 
-function Profile({ currentUser }) {
-  const [userData, setUserData] = useState({
-    fullname: currentUser?.fullname || "",
-    username: currentUser?.username || "",
-    email: currentUser?.email || "",
-    bio: currentUser?.bio || "",
-    linkedIn: currentUser?.linkedIn || "",
-    resume: null,
-    profileImg: currentUser?.profileImg || Avatar,
-  });
+function Profile() {
+  const [userData, setUserData] = useState({});
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -49,11 +41,28 @@ function Profile({ currentUser }) {
           bio: fetchedUser.bio || "",
           linkedIn: fetchedUser.linkedIn || "",
           resume: null,
-          profileImg: fetchedUser.avatar?.url || Avatar,
+          profileImg: fetchedUser?.avatar?.url || Avatar,
         });
       })
       .catch((err) => console.log(err));
   }, [user]);
+
+  if (isEditing) {
+    const formData = {
+      name: userData.fullname,
+      email: userData.email,
+      bio: userData.bio,
+      linkedIn: userData.linkedIn,
+      resumeUrl: userData.resumeUrl,
+    };
+    try {
+      api.put(`user/profile/update/${user._id}`, formData);
+      toast.success(`Profile Updated Successfully`);
+    } catch (error) {
+      toast.error("Failed to update Profile");
+      console.log(error);
+    }
+  }
 
   return (
     <>
