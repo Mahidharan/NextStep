@@ -25,10 +25,15 @@ function Profile() {
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "resume") {
+      if (!isEditing) return;
       const file = files[0];
-      setUserData({ ...userData, resume: files[0] });
+      setUserData((prev) => ({
+        ...prev,
+        resume: file,
+      }));
       uploadResume(file);
     } else if (name === "profileImg") {
+      if (!isEditing) return;
       const file = files[0];
       if (file) {
         const imageUrl = URL.createObjectURL(file);
@@ -39,7 +44,7 @@ function Profile() {
       setUserData({ ...userData, [name]: value });
     }
   };
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
 
   useEffect(() => {
     if (!user?._id) return;
@@ -70,6 +75,21 @@ function Profile() {
       const res = await api.put(`/user/avatar/${user._id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+
+      const updatedUser = {
+        ...res.data.data,
+        avatar: {
+          ...res.data.data.avatar,
+          url: `${res.data.data.avatar.url}?t=${Date.now()}`,
+        },
+      };
+
+      updateUser(updatedUser);
+
+      setUserData((prev) => ({
+        ...prev,
+        profileImg: updatedUser.avatar.url,
+      }));
     } catch (error) {
       toast.error("Failed To upload Avatar");
     }
@@ -230,7 +250,7 @@ function Profile() {
                 onChange={handleChange}
                 disabled={!isEditing}
               />
-              {userData.resume && (
+              {userData.resumeName && (
                 <p className="resume-info">Selected: {userData.resumeName}</p>
               )}
             </div>
