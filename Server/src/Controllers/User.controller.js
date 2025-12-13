@@ -65,7 +65,7 @@ const uploadResume = asyncHandler(async (req, res) => {
 
   const user = await User.findByIdAndUpdate(
     userId,
-    { resumeUrl: cloudUrl },
+    { resumeUrl: cloudUrl, resumeName: req.file.originalname },
     { new: true },
   );
 

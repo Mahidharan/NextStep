@@ -8,19 +8,32 @@ import { useAuth } from "../../Context/AuthContext";
 import { api } from "../../API/axios.js";
 
 function Profile() {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({
+    fullname: "",
+    username: "",
+    email: "",
+    bio: "",
+    linkedIn: "",
+    resume: null,
+    resumeUrl: "",
+    resumeName: "",
+    profileImg: Avatar,
+  });
 
   const [isEditing, setIsEditing] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "resume") {
+      const file = files[0];
       setUserData({ ...userData, resume: files[0] });
+      uploadResume(file);
     } else if (name === "profileImg") {
       const file = files[0];
       if (file) {
         const imageUrl = URL.createObjectURL(file);
         setUserData({ ...userData, profileImg: imageUrl });
+        uploadAvatar(file);
       }
     } else {
       setUserData({ ...userData, [name]: value });
@@ -41,28 +54,65 @@ function Profile() {
           bio: fetchedUser.bio || "",
           linkedIn: fetchedUser.linkedIn || "",
           resume: null,
+          resumeUrl: fetchedUser.resumeUrl || "",
           profileImg: fetchedUser?.avatar?.url || Avatar,
+          resumeName: fetchedUser.resumeName || "",
         });
       })
       .catch((err) => console.log(err));
   }, [user]);
 
-  if (isEditing) {
-    const formData = {
-      name: userData.fullname,
-      email: userData.email,
-      bio: userData.bio,
-      linkedIn: userData.linkedIn,
-      resumeUrl: userData.resumeUrl,
-    };
+  const uploadAvatar = async (file) => {
+    const formData = new FormData();
+    formData.append("avatar", file);
+
     try {
-      api.put(`user/profile/update/${user._id}`, formData);
-      toast.success(`Profile Updated Successfully`);
+      const res = await api.put(`/user/avatar/${user._id}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
     } catch (error) {
-      toast.error("Failed to update Profile");
-      console.log(error);
+      toast.error("Failed To upload Avatar");
     }
-  }
+  };
+
+  const uploadResume = async (file) => {
+    const formData = new FormData();
+
+    formData.append("resume", file);
+
+    try {
+      const res = await api.put(
+        `/user/profile/${user._id}/upload-resume`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+      setUserData((prev) => ({
+        ...prev,
+        resumeUrl: res.data.data.resumeUrl,
+        resumeName: res.data.data.resumeName,
+        resume: null,
+      }));
+    } catch (error) {
+      toast.error("Resume Upload failed");
+    }
+  };
+  const handleSaveProfile = async () => {
+    try {
+      const payload = {
+        name: userData.fullname,
+        email: userData.email,
+        bio: userData.bio,
+        linkedIn: userData.linkedIn,
+      };
+
+      await api.put(`/user/profile/update/${user._id}`, payload);
+      setIsEditing(false);
+    } catch (error) {
+      toast.error("Failed to update profile");
+    }
+  };
 
   return (
     <>
@@ -71,7 +121,7 @@ function Profile() {
         <aside className="profile-sidebar">
           <div className="profile-image-container">
             <img
-              src={user?.avatar?.url || userData.profileImg}
+              src={userData.profileImg || user?.avatar?.url}
               alt="Profile"
               className="profile-avatar"
             />
@@ -97,9 +147,10 @@ function Profile() {
             className={isEditing ? "save-btn" : "edit-btn"}
             onClick={() => {
               if (isEditing) {
-                toast("Saved Successfully");
+                toast("Profile Saved Successfully");
+                handleSaveProfile();
               }
-              setIsEditing(!isEditing);
+              setIsEditing(true);
             }}
           >
             {isEditing ? "Save Profile" : "Edit Profile"}
@@ -180,7 +231,7 @@ function Profile() {
                 disabled={!isEditing}
               />
               {userData.resume && (
-                <p className="resume-info">Selected: {userData.resume.name}</p>
+                <p className="resume-info">Selected: {userData.resumeName}</p>
               )}
             </div>
           </div>
