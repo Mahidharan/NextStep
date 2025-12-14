@@ -1,47 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./UserProfile.css";
 import Avatar from "../../assets/defaultavatar.png";
 import Navbar from "../../Components/Navbar/Navbar";
 import PostCard from "../../Components/Postcard/PostCard";
+import { useParams } from "react-router-dom";
+import { api } from "../../API/axios.js";
 
 function UserProfile() {
-  const [user, setUser] = useState({
-    username: "Elango",
-    fullname: "Elangovan",
-    email: "elango@example.com",
-    bio: "Frontend Developer | Tech Enthusiast",
-    linkedIn: "https://linkedin.com/in/elango",
-    resume: "https://exampleresume.com",
-    profileImg: Avatar,
-  });
+  const { userId } = useParams();
 
-  const [post, setPost] = useState([
-    {
-      id: 1,
-      company: "Google",
-      experience:
-        "Interview was challenging but great learning! Focused on DSA and problem-solving.",
-      username: "Elango",
-      userAvatar: Avatar,
-      comments: 5,
-    },
-    {
-      id: 2,
-      company: "Amazon",
-      experience:
-        "They emphasized system design and leadership principles. Great experience overall!",
-      username: "Elango",
-      userAvatar: Avatar,
-      comments: 2,
-    },
-  ]);
+  const [user, setUser] = useState(null);
+  const [post, setPost] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    const fetchedProfile = async () => {
+      try {
+        //Fetching User
+        const userRes = await api.get(`/user/profile/${userId}`);
+        setUser(userRes.data.data);
+
+        //Fetching Post
+        const postRes = await api.get(`/post/user/${userId}`);
+        setPost(postRes.data.data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchedProfile();
+  }, [userId]);
+
+  if (loading) return <h1>Loading...</h1>;
+  if (!user) return <p>User not found</p>;
 
   return (
     <>
       <Navbar />
       <div className="user-profile-container">
         <div className="user-header">
-          <img src={user.profileImg} alt="" className="user-avatar" />
+          <img src={user.avatar.url} alt="" className="user-avatar" />
           <div className="user-info">
             <h2>{user.fullname}</h2>
             <p className="username">@{user.username}</p>
@@ -70,7 +71,7 @@ function UserProfile() {
           <h3> {user.username} </h3>
           <div className="user-posts">
             {post.map((posts) => (
-              <PostCard key={posts.id} post={posts} />
+              <PostCard key={posts._id} post={posts} />
             ))}
           </div>
         </div>

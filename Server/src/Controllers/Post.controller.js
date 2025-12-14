@@ -56,6 +56,21 @@ const getPost = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, post, "Post fetched successfully"));
 });
 
+//Get All post
+const getPostByUser = asyncHandler(async (req, res) => {
+  const { userId } = req.params;
+
+  const posts = await Post.find({ userId }).sort({ createdAt: -1 });
+
+  if (!posts) {
+    throw new ApiError(404, "No post Found");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, posts, "User Posts fetched successfully"));
+});
+
 const addComment = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { userId, username, text } = req.body;
@@ -80,4 +95,4 @@ const addComment = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, post, "Comment added Successfully"));
 });
 
-export { createPost, getPost, addComment };
+export { createPost, getPost, getPostByUser, addComment };

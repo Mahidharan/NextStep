@@ -54,7 +54,7 @@ function Profile() {
         const fetchedUser = res.data.data;
         setUserData({
           fullname: fetchedUser.name || "",
-          username: fetchedUser.name || "",
+          username: fetchedUser.username || "",
           email: fetchedUser.email || "",
           bio: fetchedUser.bio || "",
           linkedIn: fetchedUser.linkedIn || "",
@@ -122,12 +122,14 @@ function Profile() {
     try {
       const payload = {
         name: userData.fullname,
+        username: userData.username,
         email: userData.email,
         bio: userData.bio,
         linkedIn: userData.linkedIn,
       };
 
-      await api.put(`/user/profile/update/${user._id}`, payload);
+      const res = await api.put(`/user/profile/update/${user._id}`, payload);
+      updateUser(res.data.data);
       setIsEditing(false);
     } catch (error) {
       toast.error("Failed to update profile");
