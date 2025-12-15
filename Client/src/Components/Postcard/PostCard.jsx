@@ -18,9 +18,9 @@ function PostCard({ post }) {
     <div className="post-card">
       <div className="userinfo">
         <img
-          src={post.userAvatar}
+          src={post.userAvatar?.url}
           alt="elango avatar"
-          onClick={() => changePage(`/user/${post.userId}`)}
+          onClick={() => changePage(`/profile/${post.userId}`)}
         />
         <div className="uname-company">
           <h3>{post.username}</h3>
@@ -28,7 +28,7 @@ function PostCard({ post }) {
         </div>
       </div>
       <div className="post-img">
-        <img src={post.postImage} alt="" />
+        <img src={post.image} alt="" loading="lazy" />
       </div>
       <div className="experience">
         <p>
@@ -44,7 +44,7 @@ function PostCard({ post }) {
           {post.comments.length}
         </div>
         <div className="read-more">
-          <button onClick={() => changePage(`/post/${post.id}`)}>
+          <button onClick={() => changePage(`/post/${post._id}`)}>
             <MdOutlineReadMore className="icon" />
             Read More
           </button>

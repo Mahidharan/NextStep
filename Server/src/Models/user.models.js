@@ -5,11 +5,6 @@ const userSchema = new Schema(
     avatar: {
       type: {
         url: String,
-        localpath: String,
-      },
-      default: {
-        url: `https://placehold.co/200x200`,
-        localpath: "",
       },
     },
     googleId: {

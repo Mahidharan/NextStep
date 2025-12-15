@@ -5,6 +5,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import PostCard from "../../Components/Postcard/PostCard";
 import { useParams } from "react-router-dom";
 import { api } from "../../API/axios.js";
+import Loader from "../../Components/Loader/Loader.jsx";
 
 function UserProfile() {
   const { userId } = useParams();
@@ -34,7 +35,7 @@ function UserProfile() {
     fetchedProfile();
   }, [userId]);
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <Loader />;
   if (!user) return <p>User not found</p>;
 
   return (
@@ -44,7 +45,7 @@ function UserProfile() {
         <div className="user-header">
           <img src={user.avatar.url} alt="" className="user-avatar" />
           <div className="user-info">
-            <h2>{user.fullname}</h2>
+            <h2>{user.name}</h2>
             <p className="username">@{user.username}</p>
             <p className="bio"> {user.bio} </p>
             <a
@@ -55,9 +56,9 @@ function UserProfile() {
             >
               View LinkedIn
             </a>
-            {user.resume && (
+            {user.resumeUrl && (
               <a
-                href={user.resume}
+                href={user.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="resume-link"

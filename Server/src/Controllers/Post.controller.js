@@ -3,6 +3,7 @@ import { asyncHandler } from "../Utils/asyncHandler.js";
 import { ApiError } from "../Utils/api-error.js";
 import { ApiResponse } from "../Utils/api-response.js";
 import { uploadCloudinary } from "../Utils/cloudinary.js";
+import { User } from "../Models/user.models.js";
 
 //Creating Post
 const createPost = asyncHandler(async (req, res) => {
@@ -24,12 +25,19 @@ const createPost = asyncHandler(async (req, res) => {
     imageUrl = cloudinaryFile;
   }
 
+  const user = await User.findById(userId).select("avatar name username");
+
+  if (!user) {
+    throw ApiError(404, "User Not Found");
+  }
+
   const post = await Post.create({
     userId,
-    username,
+    username: user.username,
     company,
     experience: experience,
     image: imageUrl,
+    userAvatar: user?.avatar,
   });
 
   if (!post) {
