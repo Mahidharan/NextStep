@@ -1,21 +1,66 @@
-.loader-container {
-  min-height: 60vh;
+.chip-loader-wrapper {
+  position: fixed;
+  inset: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
+  z-index: 9999;
+  font-family: "Poppins", sans-serif;
 }
 
-.loader {
-  width: 55px;
-  height: 55px;
-  border: 5px solid rgba(255, 255, 255, 0.15);
-  border-top: 5px solid #7c7cff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.chip-container {
+  position: relative;
+  width: 72px;
+  height: 72px;
 }
 
-@keyframes spin {
-  100% {
+.chip-border {
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(0, 220, 255, 0.9);
+  box-shadow: 0 0 15px rgba(0, 220, 255, 0.7), 0 0 40px rgba(0, 180, 255, 0.4);
+  animation: rotateBorder 2.5s linear infinite;
+}
+
+.chip-core {
+  position: absolute;
+  inset: 16px;
+  background: radial-gradient(
+    circle,
+    rgba(0, 220, 255, 1),
+    rgba(0, 180, 255, 0.35),
+    transparent
+  );
+  box-shadow: 0 0 20px rgba(0, 220, 255, 0.8), 0 0 50px rgba(0, 180, 255, 0.5);
+}
+
+.chip-text {
+  margin-top: 18px;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: rgba(160, 220, 255, 0.9);
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+@keyframes rotateBorder {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .chip-container {
+    width: 56px;
+    height: 56px;
+  }
+
+  .chip-core {
+    inset: 12px;
   }
 }

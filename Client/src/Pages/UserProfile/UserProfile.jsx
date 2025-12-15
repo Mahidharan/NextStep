@@ -19,19 +19,29 @@ function UserProfile() {
 
     const fetchedProfile = async () => {
       try {
-        //Fetching User
-        const userRes = await api.get(`/user/profile/${userId}`);
-        setUser(userRes.data.data);
+        const startTime = Date.now();
 
-        //Fetching Post
-        const postRes = await api.get(`/post/user/${userId}`);
+        // API calls
+        const [userRes, postRes] = await Promise.all([
+          api.get(`/user/profile/${userId}`),
+          api.get(`/post/user/${userId}`),
+        ]);
+
+        setUser(userRes.data.data);
         setPost(postRes.data.data);
+
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = Math.max(4000 - elapsedTime, 0);
+
+        setTimeout(() => {
+          setLoading(false);
+        }, remainingTime);
       } catch (error) {
         console.error(error);
-      } finally {
         setLoading(false);
       }
     };
+
     fetchedProfile();
   }, [userId]);
 

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext.jsx";
-import "./AuthSuccess.css";
+import Loader from "../../Components/Loader/Loader.jsx";
 
 function AuthSuccess() {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ function AuthSuccess() {
   return (
     <div className="auth-loader">
       <div className="loader-circle"></div>
-      <p>Loading...</p>
+      <Loader />
     </div>
   );
 }
