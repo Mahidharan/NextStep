@@ -1,22 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import "./PostDetails.css";
+import { useAuth } from "../../Context/AuthContext";
+import Loader from "../../Components/Loader/Loader";
+import { api } from "../../API/axios.js";
 
-function PostDetails({ posts }) {
+function PostDetails() {
   const { id } = useParams();
-  const post = posts?.find((p) => p.id === parseInt(id));
+  const { user } = useAuth;
 
-  const [comments, setComments] = useState(post.comments || []);
+  const [post, setPost] = useState(null);
+
+  const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
-  const handleAddComment = () => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const res = await api.get(`post/${id}`);
+        setPost(res.data.data);
+        setComments(res.data.data.comments || []);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPost();
+  }, [id]);
+
+  const handleAddComment = async () => {
     if (newComment.trim() === "") return;
 
-    const newCommentObj = { username: "You", text: newComment };
-    setComments([...comments, newCommentObj]);
-    setNewComment("");
+    try {
+      const res = await api.get(`post/comment/${id}`, {
+        userId: user._id,
+        username: user.username,
+        text: newComment,
+      });
+
+      setComments(res.data.data.comments);
+      setNewComment("");
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  if (loading) return <Loader />;
 
   const onKeyPress = (e) => {
     if (e.key === "Enter") handleAddComment();
