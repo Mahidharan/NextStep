@@ -31,7 +31,7 @@ function UserProfile() {
         setPost(postRes.data.data);
 
         const elapsedTime = Date.now() - startTime;
-        const remainingTime = Math.max(4000 - elapsedTime, 0);
+        const remainingTime = Math.max(5000 - elapsedTime, 0);
 
         setTimeout(() => {
           setLoading(false);

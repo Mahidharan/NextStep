@@ -64,7 +64,18 @@ const getPost = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, post, "Post fetched successfully"));
 });
 
-//Get All post
+//get all post
+const getAllPosts = asyncHandler(async (req, res) => {
+  const posts = await Post.find().sort({ createdAt: -1 });
+
+  if (!posts) {
+    throw new ApiError(400, "Error fetching");
+  }
+
+  return res.status(200).json(new ApiResponse(200, posts, "All posts fetched"));
+});
+
+//Get all post by user
 const getPostByUser = asyncHandler(async (req, res) => {
   const { userId } = req.params;
 
@@ -103,4 +114,4 @@ const addComment = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, post, "Comment added Successfully"));
 });
 
-export { createPost, getPost, getPostByUser, addComment };
+export { createPost, getPost, getPostByUser, addComment, getAllPosts };
