@@ -1,11 +1,10 @@
 import React from "react";
 import "./PostCard.css";
 import { FaRegComment } from "react-icons/fa";
-import { FiBookOpen } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineReadMore } from "react-icons/md";
 
-function PostCard({ post }) {
+function PostCard() {
   const navigate = useNavigate();
 
   const changePage = (page) => {
