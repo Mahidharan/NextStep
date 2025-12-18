@@ -1,16 +1,16 @@
 .post-card {
-  border: 1px solid rgba(139, 92, 246, 0.2);
+  background: linear-gradient(180deg, #0f1c33, #0b162a);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
   width: min(100%, 700px);
   padding: 1rem;
-  border-radius: 1rem;
   box-sizing: border-box;
   transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
-  background-color: #001634;
 }
 
 .post-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 0 25px rgba(168, 85, 247, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   border-color: rgba(139, 92, 246, 0.35);
 }
 
@@ -33,9 +33,14 @@
   justify-content: space-around;
   align-items: center;
 }
+.uname-company h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}
 
 .uname-company p {
   font-size: 0.75rem;
+  color: #9ca3af;
 }
 
 .post-img img {
@@ -64,7 +69,7 @@
 }
 
 .comment {
-  color: #8b5cf6;
+  color: #9ca3af;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -96,11 +101,11 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: #8b5cf6;
-  color: #fff;
+  background: rgba(99, 102, 241, 0.15);
+  color: #c7d2fe;
+  border-radius: 10px;
   border: none;
-  border-radius: 8px;
-  padding: 0.6rem;
+  padding: 0.8rem;
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 500;
@@ -108,10 +113,10 @@
 }
 
 .read-more button:hover {
-  background-color: #a78bfa;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
   transform: translateY(-2px);
 }
 
 .read-more .icon {
-  color: black;
+  color: rgb(44, 19, 185);
 }

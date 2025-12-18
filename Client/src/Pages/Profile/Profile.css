@@ -9,7 +9,11 @@
 
 .profile-sidebar {
   width: 14rem;
-  background-color: #15182394;
+  background: linear-gradient(
+    180deg,
+    rgba(21, 24, 35, 0.85),
+    rgba(15, 18, 28, 0.9)
+  );
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,11 +70,10 @@
 
 .edit-btn,
 .save-btn {
-  background: linear-gradient(90deg, #140bcf, #7b5eff);
+  background: linear-gradient(90deg, #191293e4, #160466ec);
   box-shadow: 0 0 10px rgba(108, 99, 255, 0.4);
-
   border: none;
-  padding: 8px 18px;
+  padding: 0.75rem 1rem;
   border-radius: 8px;
   color: white;
   font-weight: 500;
@@ -107,6 +110,8 @@
 .profile-card:hover,
 .document-card:hover {
   border-color: #6c63ff;
+  transform: translateY(-2px);
+  transition: all 0.25s ease;
 }
 
 .profile-card h3,
@@ -137,6 +142,9 @@
   color: #e5e5e5;
   outline: none;
   transition: border 0.3s ease;
+}
+.card-body input:hover {
+  border-color: rgba(108, 99, 255, 0.6);
 }
 
 .card-body input:focus {

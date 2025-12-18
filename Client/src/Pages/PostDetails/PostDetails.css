@@ -9,13 +9,12 @@
 }
 
 .post-detail-card {
-  background-color: #001634;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(139, 92, 246, 0.2);
+  background: linear-gradient(180deg, #0f1c33, #0b162a);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1rem;
   box-shadow: 0 0 20px rgba(139, 92, 246, 0.25);
   width: min(80%, 500px);
   padding: 2rem;
-  border-radius: 16px;
   box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
   transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
 }

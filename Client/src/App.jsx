@@ -10,7 +10,6 @@ import AuthSuccess from "./Pages/Auth/AuthSuccess.jsx";
 import ProtectedRoutes from "./Components/ProtectedRoutes.jsx";
 
 function App() {
- 
   return (
     <Router>
       <Routes>
@@ -23,7 +22,7 @@ function App() {
           path="/"
           element={
             <ProtectedRoutes>
-              <Home posts={posts} />
+              <Home />
             </ProtectedRoutes>
           }
         />
@@ -31,7 +30,7 @@ function App() {
           path="/post/:id"
           element={
             <ProtectedRoutes>
-              <PostDetails posts={posts} />
+              <PostDetails />
             </ProtectedRoutes>
           }
         />
@@ -56,7 +55,7 @@ function App() {
           path="/create-post"
           element={
             <ProtectedRoutes>
-              <CreatePost setPosts={setPosts} />
+              <CreatePost />
             </ProtectedRoutes>
           }
         />

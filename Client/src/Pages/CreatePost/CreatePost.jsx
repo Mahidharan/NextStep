@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { api } from "../../API/axios";
 import { useAuth } from "../../Context/AuthContext";
 
-function CreatePost({ setPosts }) {
+function CreatePost() {
   const navigate = useNavigate();
 
   const change = (page) => {

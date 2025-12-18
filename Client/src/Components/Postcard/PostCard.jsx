@@ -4,7 +4,7 @@ import { FaRegComment } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineReadMore } from "react-icons/md";
 
-function PostCard() {
+function PostCard({ post }) {
   const navigate = useNavigate();
 
   const changePage = (page) => {
