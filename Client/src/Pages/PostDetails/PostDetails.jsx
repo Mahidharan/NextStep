@@ -8,7 +8,7 @@ import { api } from "../../API/axios.js";
 
 function PostDetails() {
   const { id } = useParams();
-  const { user } = useAuth;
+  const { user } = useAuth();
 
   const [post, setPost] = useState(null);
 
@@ -50,10 +50,6 @@ function PostDetails() {
 
   if (loading) return <Loader />;
 
-  const onKeyPress = (e) => {
-    if (e.key === "Enter") handleAddComment();
-  };
-
   if (!post) {
     return (
       <div>
@@ -73,7 +69,7 @@ function PostDetails() {
           <p>{post.company}</p>
         </div>
         <div className="img-container">
-          <img src={post.postImage} alt="" />
+          <img src={post.image} alt="" />
         </div>
         <div className="post-body">
           <p>{post.experience}</p>
@@ -94,7 +90,7 @@ function PostDetails() {
               value={newComment}
               placeholder="Write a comment"
               onChange={(e) => setNewComment(e.target.value)}
-              onKeyPress={onKeyPress}
+              onKeyDown={(e) => e.key === "Enter" && handleAddComment()}
             />
             <button onClick={handleAddComment}>Add</button>
           </div>
