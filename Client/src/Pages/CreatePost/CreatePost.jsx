@@ -53,7 +53,6 @@ function CreatePost() {
     try {
       const formData = new FormData();
       formData.append("userId", user._id);
-      formData.append("username", user.name);
       formData.append("company", postData.company);
       formData.append("experience", postData.experience);
       formData.append("postImage", image);
@@ -75,8 +74,8 @@ function CreatePost() {
       <div className="container">
         <div className="header">
           <div className="image">
-            <img src={Avatar} alt="" />
-            <p>FRIDAY</p>
+            <img src={user?.avatar?.url} alt="" />
+            <p>{user?.username || user?.name || "User"}</p>
           </div>
           <h2>Create Post Share Experience</h2>
         </div>
