@@ -1,0 +1,72 @@
+.legal-page {
+  min-height: 100vh;
+  padding: 2.5rem 1.2rem;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(180deg, #0a0f1e 0%, #0c1530 40%, #0f1d45 100%);
+  font-family: "Poppins", sans-serif;
+  color: #e6e9f0;
+}
+
+.legal-card {
+  width: 100%;
+  height: 100%;
+  max-width: 900px;
+  background: linear-gradient(
+    145deg,
+    rgba(14, 22, 52, 0.95),
+    rgba(9, 14, 34, 0.95)
+  );
+  border-radius: 14px;
+  padding: 2rem 1.6rem;
+  border: 1px solid rgba(108, 99, 255, 0.35);
+  box-shadow: 0 0 0 1px rgba(108, 99, 255, 0.15), 0 25px 60px rgba(0, 0, 0, 0.7);
+}
+
+.legal-card h1 {
+  font-size: 1.7rem;
+  margin-bottom: 0.4rem;
+  color: #ffffff;
+}
+
+.updated {
+  font-size: 0.8rem;
+  color: #9aa0b4;
+  margin-bottom: 1.5rem;
+}
+
+section {
+  margin-bottom: 1.4rem;
+}
+
+section h3 {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: #ffffff;
+}
+
+section p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #cfd3e6;
+}
+
+section ul {
+  padding-left: 1.2rem;
+}
+
+section li {
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+  color: #cfd3e6;
+}
+
+@media (max-width: 480px) {
+  .legal-card {
+    padding: 1.6rem 1.2rem;
+  }
+
+  .legal-card h1 {
+    font-size: 1.5rem;
+  }
+}

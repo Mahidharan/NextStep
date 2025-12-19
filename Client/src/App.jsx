@@ -8,6 +8,8 @@ import Chat from "./Pages/Chat/Chat";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import AuthSuccess from "./Pages/Auth/AuthSuccess.jsx";
 import ProtectedRoutes from "./Components/ProtectedRoutes.jsx";
+import Terms from "./Pages/Terms&Privacy/Terms.jsx";
+import Privacy from "./Pages/Terms&Privacy/Privacy.jsx";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         {/* Public Routes */}
         <Route path="/auth-success" element={<AuthSuccess />} />
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy-policy" element={<Privacy />} />
 
         {/* ProtectedRoutes */}
         <Route
