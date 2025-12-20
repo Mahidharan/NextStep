@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import userRoutes from "./Routes/userRoutes.js";
 import postRoutes from "./Routes/postRoutes.js";
+import chatRoutes from "./Routes/Chat.routes.js";
 import passport from "./Config/googleAuth.js";
 import session from "express-session";
 const app = express();
@@ -35,6 +36,7 @@ app.use(passport.session());
 //Routing
 app.use("/api/user", userRoutes);
 app.use("/api/post", postRoutes);
+app.use("/api/chat", chatRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to nextstep");

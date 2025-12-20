@@ -49,6 +49,24 @@ const updateUser = asyncHandler(async (req, res) => {
     );
 });
 
+//Search User(chat)
+
+const searchUser = asyncHandler(async (req, res) => {
+  const query = req.query.query;
+
+  if (!query) {
+    throw new ApiError(400, "Search Query required");
+  }
+
+  const users = await User.find({
+    name: { $regex: query, $options: "i" },
+  }).select("_id name username avatar");
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, users, "User Fetched Successfully"));
+});
+
 //uploading resume
 const uploadResume = asyncHandler(async (req, res) => {
   const userId = req.params.id;
@@ -101,4 +119,4 @@ const uploadAvatar = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, updateUser, "Avatar Uploaded Successfully"));
 });
 
-export { getUser, updateUser, uploadResume, uploadAvatar };
+export { getUser, updateUser, searchUser, uploadResume, uploadAvatar };

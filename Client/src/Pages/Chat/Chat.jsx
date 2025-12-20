@@ -51,11 +51,7 @@ function Chat() {
     setNewMessage("");
   };
 
-  // setTimeout(() => {
-  //   setMessage((prev) => {
-  //     [...prev, { sender: "other", text: "Got your Message" }];
-  //   });
-  // }, 8000);
+  
 
   return (
     <>

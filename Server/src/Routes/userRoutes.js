@@ -4,6 +4,7 @@ import {
   updateUser,
   uploadResume,
   uploadAvatar,
+  searchUser,
 } from "../Controllers/User.controller.js";
 import { upload } from "../Middlewares/Multer.middleware.js";
 import passport from "../Config/googleAuth.js";
@@ -33,5 +34,7 @@ router.route("/avatar/:id").put(upload.single("avatar"), uploadAvatar);
 router
   .route("/profile/:id/upload-resume")
   .put(upload.single("resume"), uploadResume);
+
+router.route("/search").get(searchUser);
 
 export default router;
