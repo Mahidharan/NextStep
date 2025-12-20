@@ -57,7 +57,7 @@ const uploadResume = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Resume file not found");
   }
 
-  const cloudUrl = await uploadCloudinary(req.file.path);
+  const cloudUrl = await uploadCloudinary(req.file.path, "raw");
 
   if (!cloudUrl) {
     throw new ApiError(400, "Resume upload failed");
