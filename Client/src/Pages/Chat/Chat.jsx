@@ -34,6 +34,25 @@ function Chat() {
     fetchUsers();
   }, [search]);
 
+  const socketRef = useRef(null);
+
+  useEffect(() => {
+    socketRef.current = new WebSocket("ws://localhost:8000");
+
+    socketRef.current.onopen = () => {
+      console.log("✅WebSocket connected");
+    };
+
+    socketRef.current.onmessage = (event) => {
+      const msg = JSON.parse(event.data);
+      setMessage((prev) => [...prev, msg]);
+    };
+    socketRef.current.onclose = () => {
+      console.log("WebSocket disconnected");
+    };
+    return () => socketRef.current.close();
+  }, []);
+
   const openChat = async (user) => {
     setSelectedUser(user);
     setLoading(true);
