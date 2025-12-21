@@ -1,111 +1,138 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Chat.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import { FaPaperPlane } from "react-icons/fa";
+import { api } from "../../API/axios.js";
+import Avatar from "../../assets/defaultavatar.png";
 
 function Chat() {
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      name: "Jarvis",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi2haw1278i40sszGwCvy7LKP3j2KqLTnPJg&s",
-      online: true,
-    },
-    {
-      id: 2,
-      name: "FRIDAY",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi2haw1278i40sszGwCvy7LKP3j2KqLTnPJg&s",
-      online: false,
-    },
-    {
-      id: 3,
-      name: "EDITH",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi2haw1278i40sszGwCvy7LKP3j2KqLTnPJg&s",
-      online: true,
-    },
-  ]);
+  const [search, setSearch] = useState("");
+  const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
 
-  const [selectedUser, setSelectedUser] = useState(users[0]);
-
-  const [message, setMessage] = useState([
-    {
-      sender: "me",
-      text: "Hi!there",
-    },
-
-    {
-      sender: "other",
-      text: "hey!Whatsup",
-    },
-  ]);
-
+  const [message, setMessage] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
-  const sendMessage = () => {
-    if (!newMessage.trim()) return;
+  const chatEndRef = useRef(null);
 
-    setMessage((prev) => [...prev, { sender: "me", text: newMessage }]);
-    setNewMessage("");
+  useEffect(() => {
+    const fetchUsers = async () => {
+      if (!search.trim()) {
+        setUsers([]);
+        return;
+      }
+      try {
+        const res = await api.get(`/user/search?query=${search}`);
+        setUsers(res.data.data);
+      } catch (error) {
+        console.error("User search error", error);
+      }
+    };
+    fetchUsers();
+  }, [search]);
+
+  const openChat = async (user) => {
+    setSelectedUser(user);
+
+    try {
+      const res = await api.get(`chat/${user._id}`);
+      setMessage(res.data.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  
+  const sendMessage = async () => {
+    if (!newMessage.trim() || !selectedUser) return;
+
+    try {
+      const res = await api.post(`chat/send`, {
+        receiverId: selectedUser._id,
+        text: newMessage,
+      });
+
+      setMessage((prev) => [...prev, res.data.data]);
+      setNewMessage("");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [message]);
 
   return (
     <>
-      <Navbar />
       <div className="chat-page">
         <div className="right-sidebar">
           <div className="search-bar">
-            <input type="text" placeholder="Search User" />
+            <input
+              type="text"
+              placeholder="Search user..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
           <div className="user-list">
             {users.map((user) => (
               <div
-                key={user.id}
+                key={user._id}
                 className={`user-item ${
-                  selectedUser.id === user.id ? "active" : ""
+                  selectedUser?._id === user._id ? "active" : ""
                 }`}
-                onClick={() => setSelectedUser(user)}
+                onClick={() => openChat(user)}
               >
-                <img src={user.avatar} alt={user.name} />
+                <img src={user.avatar?.url} alt={user.name} />
                 <div>
                   <h4>{user.name}</h4>
-                  {user.online && <span className="online-dot"></span>}
                 </div>
               </div>
             ))}
+            {search && users.length === 0 && <p>No User found</p>}
           </div>
         </div>
         <div className="msg-container">
-          <div className="chat-header">
-            <img src={selectedUser.avatar} alt="" />
-            <h3>{selectedUser.name}</h3>
-          </div>
-          <div className="chat-body">
-            {message.map((msg, index) => (
-              <div
-                key={index}
-                className={`message ${
-                  msg.sender === "me" ? "sent" : "received"
-                }`}
-              >
-                {msg.text}
+          {!selectedUser ? (
+            <div className="chat-body">
+              <p>Search and Select a user to chat</p>
+            </div>
+          ) : (
+            <>
+              <div className="chat-header">
+                <img
+                  src={selectedUser.avatar.url || Avatar}
+                  alt={selectedUser.name}
+                />
+                <h3>{selectedUser.name}</h3>
               </div>
-            ))}
-          </div>
-          <div className="chat-input">
-            <input
-              type="text"
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-            />
-            <button onClick={sendMessage}>
-              <FaPaperPlane /> Send
-            </button>
-          </div>
+              <div className="chat-body">
+                {message.map((msg) => (
+                  <div
+                    key={msg._id}
+                    className={`message ${
+                      msg.sender._id === selectedUser._id ? "received" : "sent"
+                    }`}
+                  >
+                    {msg.text}
+                    <div ref={chatEndRef}></div>
+                  </div>
+                ))}
+                <div className="chat-input">
+                  <input
+                    type="text"
+                    placeholder="Type a message..."
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+                  />
+                  <button onClick={sendMessage}>
+                    <FaPaperPlane /> Send
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>
