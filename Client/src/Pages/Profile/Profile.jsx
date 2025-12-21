@@ -5,6 +5,7 @@ import Avatar from "../../assets/defaultavatar.png";
 import { FaUpload } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import { useAuth } from "../../Context/AuthContext";
+import Loader from "../../Components/Loader/Loader.jsx";
 import { api } from "../../API/axios.js";
 
 function Profile() {
@@ -21,6 +22,7 @@ function Profile() {
   });
 
   const [isEditing, setIsEditing] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -48,6 +50,7 @@ function Profile() {
 
   useEffect(() => {
     if (!user?._id) return;
+    setLoading(true);
     api
       .get(`/user/profile/${user._id}`)
       .then((res) => {
@@ -64,7 +67,8 @@ function Profile() {
           resumeName: fetchedUser.resumeName || "",
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   }, [user]);
 
   const uploadAvatar = async (file) => {
@@ -135,6 +139,14 @@ function Profile() {
       toast.error("Failed to update profile");
     }
   };
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <Loader />
+      </>
+    );
+  }
 
   return (
     <>

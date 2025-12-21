@@ -3,6 +3,7 @@ import "./Chat.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import { FaPaperPlane } from "react-icons/fa";
 import { api } from "../../API/axios.js";
+import Loader from "../../Components/Loader/Loader.jsx";
 import Avatar from "../../assets/defaultavatar.png";
 
 function Chat() {
@@ -12,6 +13,7 @@ function Chat() {
 
   const [message, setMessage] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const chatEndRef = useRef(null);
 
@@ -33,12 +35,15 @@ function Chat() {
 
   const openChat = async (user) => {
     setSelectedUser(user);
+    setLoading(true);
 
     try {
       const res = await api.get(`chat/${user._id}`);
       setMessage(res.data.data);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -94,7 +99,9 @@ function Chat() {
           </div>
         </div>
         <div className="msg-container">
-          {!selectedUser ? (
+          {loading ? (
+            <Loader />
+          ) : !selectedUser ? (
             <div className="chat-body">
               <p>Search and Select a user to chat</p>
             </div>
