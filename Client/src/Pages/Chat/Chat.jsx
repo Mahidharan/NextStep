@@ -64,6 +64,7 @@ function Chat() {
 
   return (
     <>
+      <Navbar />
       <div className="chat-page">
         <div className="right-sidebar">
           <div className="search-bar">
