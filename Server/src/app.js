@@ -5,6 +5,7 @@ import postRoutes from "./Routes/postRoutes.js";
 import chatRoutes from "./Routes/Chat.routes.js";
 import passport from "./Config/googleAuth.js";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 const app = express();
 
 //Basic configuration
@@ -27,6 +28,16 @@ app.use(
     secret: "NEXTSTEP_SECRET",
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URL,
+      collectionName: "sessions",
+    }),
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      maxAge: 1000 * 60 * 60 * 24,
+    },
   }),
 );
 

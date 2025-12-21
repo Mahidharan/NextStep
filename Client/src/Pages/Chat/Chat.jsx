@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Chat.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import { FaPaperPlane } from "react-icons/fa";
@@ -67,6 +68,14 @@ function Chat() {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [message]);
 
+  const navigate = useNavigate();
+
+  const changePage = (page) => {
+    if (!page) return;
+
+    navigate(page);
+  };
+
   return (
     <>
       <Navbar />
@@ -89,7 +98,11 @@ function Chat() {
                 }`}
                 onClick={() => openChat(user)}
               >
-                <img src={user.avatar?.url} alt={user.name} />
+                <img
+                  src={user.avatar?.url}
+                  alt={user.name}
+                  onClick={() => changePage(`/profile/${user._id}`)}
+                />
                 <div>
                   <h4>{user.name}</h4>
                 </div>
