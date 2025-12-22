@@ -1,6 +1,7 @@
 import { WebSocketServer } from "ws";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import { sessionMiddleware } from "./Session.js";
 
 const sessionParser = session({
   secret: "NEXTSTEP_SECRET",
@@ -15,7 +16,7 @@ function initWebSocket(server) {
   const wss = new WebSocketServer({ noServer: true });
 
   server.on("upgrade", (req, socket, head) => {
-    sessionParser(req, {}, () => {
+    sessionMiddleware(req, {}, () => {
       if (!req.session?.passport?.user) {
         socket.destroy();
         return;

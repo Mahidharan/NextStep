@@ -4,8 +4,8 @@ import userRoutes from "./Routes/userRoutes.js";
 import postRoutes from "./Routes/postRoutes.js";
 import chatRoutes from "./Routes/Chat.routes.js";
 import passport from "./Config/googleAuth.js";
-import session from "express-session";
-import MongoStore from "connect-mongo";
+import { sessionMiddleware } from "./Session.js";
+
 const app = express();
 
 //Basic configuration
@@ -23,23 +23,7 @@ app.use(
   }),
 );
 
-app.use(
-  session({
-    secret: "NEXTSTEP_SECRET",
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: process.env.MONGO_URL,
-      collectionName: "sessions",
-    }),
-    cookie: {
-      httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-      maxAge: 1000 * 60 * 60 * 24,
-    },
-  }),
-);
+app.use(sessionMiddleware);
 
 app.use(passport.initialize());
 app.use(passport.session());

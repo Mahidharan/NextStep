@@ -10,6 +10,7 @@ import AuthSuccess from "./Pages/Auth/AuthSuccess.jsx";
 import ProtectedRoutes from "./Components/ProtectedRoutes.jsx";
 import Terms from "./Pages/Terms&Privacy/Terms.jsx";
 import Privacy from "./Pages/Terms&Privacy/Privacy.jsx";
+import Footer from "./Components/Footer/Footer.jsx";
 
 function App() {
   return (
@@ -72,6 +73,7 @@ function App() {
           }
         />
       </Routes>
+      <Footer />
     </Router>
   );
 }

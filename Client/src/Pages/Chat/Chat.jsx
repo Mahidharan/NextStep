@@ -70,17 +70,17 @@ function Chat() {
   const sendMessage = async () => {
     if (!newMessage.trim() || !selectedUser) return;
 
-    try {
-      const res = await api.post(`chat/send`, {
-        receiverId: selectedUser._id,
-        text: newMessage,
-      });
+    const res = await api.post("/chat/send", {
+      receiverId: selectedUser._id,
+      text: newMessage,
+    });
 
-      setMessage((prev) => [...prev, res.data.data]);
-      setNewMessage("");
-    } catch (error) {
-      console.error(error);
-    }
+    const msg = {
+      text: newMessage,
+      receiverId: selectedUser._id,
+    };
+    socketRef.current.send(JSON.stringify(msg));
+    setNewMessage("");
   };
 
   useEffect(() => {
@@ -147,11 +147,11 @@ function Chat() {
                 <h3>{selectedUser.name}</h3>
               </div>
               <div className="chat-body">
-                {message.map((msg) => (
+                {message.map((msg, index) => (
                   <div
-                    key={msg._id}
+                    key={msg._id || `${msg.sender?._id}-${index}`}
                     className={`message ${
-                      msg.sender._id === selectedUser._id ? "received" : "sent"
+                      msg.sender?._id === selectedUser._id ? "received" : "sent"
                     }`}
                   >
                     {msg.text}
