@@ -1,35 +1,51 @@
 .footer {
-  background: linear-gradient(180deg, #0b1220, #060b16);
-  color: #cbd5f5;
-  padding: 60px 20px 20px;
+  width: 100%;
+  background: rgb(6, 6, 20);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   font-family: "Poppins", sans-serif;
+  margin-top: 1.9rem;
+  margin-bottom: 0.2rem;
+}
+
+.footer-inner {
+  margin: 0 auto;
+  padding: 2rem 1rem 1rem;
+  color: #cbd5f5;
 }
 
 .footer-container {
-  max-width: 1200px;
-  margin: auto;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 40px;
 }
+.footer-brand .img-container {
+  display: flex;
+  gap: 0.7rem;
+  margin-bottom: 0.7rem;
+}
+.footer-brand .img-container img {
+  width: 3rem;
+  height: 2.5rem;
+}
 
 .footer-brand h2 {
-  color: #ffffff;
   font-size: 24px;
+  color: #fff;
   margin-bottom: 10px;
 }
 
 .footer-brand p {
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.7;
   color: #9aa4c7;
+  max-width: 420px;
 }
 
 .footer-links h3,
 .footer-connect h3 {
-  color: #ffffff;
-  margin-bottom: 15px;
   font-size: 16px;
+  margin-bottom: 16px;
+  color: #fff;
 }
 
 .footer-links ul {
@@ -38,18 +54,19 @@
 }
 
 .footer-links li {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .footer-links a {
   text-decoration: none;
-  color: #9aa4c7;
   font-size: 14px;
-  transition: color 0.3s;
+  color: #9aa4c7;
+  transition: all 0.25s ease;
 }
 
 .footer-links a:hover {
   color: #5eead4;
+  padding-left: 4px;
 }
 
 .social-links {
@@ -62,37 +79,37 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  text-decoration: none;
-  color: #9aa4c7;
   font-size: 14px;
-  transition: color 0.3s;
+  color: #9aa4c7;
+  text-decoration: none;
+  transition: all 0.25s ease;
 }
 
 .social-links a:hover {
   color: #5eead4;
+  transform: translateX(4px);
 }
 
 .footer-bottom {
+  margin-top: 2.3rem;
+  padding: 0.8rem;
+  padding-top: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  margin-top: 40px;
-  padding-top: 15px;
   text-align: center;
   font-size: 13px;
   color: #8b95b7;
 }
 
 .footer-bottom span {
-  color: #ffffff;
+  color: #fff;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .footer-container {
     grid-template-columns: 1fr;
-    text-align: center;
   }
 
-  .social-links {
-    align-items: center;
+  .footer-brand p {
+    margin: auto;
   }
 }

@@ -3,6 +3,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import "./Home.css";
 import PostCard from "../../Components/Postcard/PostCard";
 import Loader from "../../Components/Loader/Loader";
+import Footer from "../../Components/Footer/Footer.jsx";
 import { api } from "../../API/axios";
 
 function Home() {
@@ -29,14 +30,17 @@ function Home() {
   if (loading) return <Loader />;
 
   return (
-    <div className="home">
-      <Navbar />
-      <div className="post-grid">
-        {posts.map((post) => (
-          <PostCard key={post._id} post={post} />
-        ))}
+    <>
+      <div className="home">
+        <Navbar />
+        <div className="post-grid">
+          {posts.map((post) => (
+            <PostCard key={post._id} post={post} />
+          ))}
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 
