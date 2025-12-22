@@ -28,6 +28,25 @@ router.route("/google/callback").get(
   },
 );
 
+router.get("/me", (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.status(401).json({ success: false });
+  }
+
+  res.status(200).json({
+    success: true,
+    user: req.user,
+  });
+});
+router.post("/logout", (req, res) => {
+  req.logout(() => {
+    req.session.destroy(() => {
+      res.clearCookie("connect.sid");
+      res.status(200).json({ success: true });
+    });
+  });
+});
+
 router.route("/profile/:id").get(getUser);
 router.route("/profile/update/:id").put(updateUser);
 router.route("/avatar/:id").put(upload.single("avatar"), uploadAvatar);

@@ -6,7 +6,6 @@ import Loader from "../../Components/Loader/Loader.jsx";
 function AuthSuccess() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { login } = useAuth();
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -15,8 +14,6 @@ function AuthSuccess() {
     if (userString) {
       try {
         const user = JSON.parse(userString);
-
-        login(user);
 
         setTimeout(() => {
           navigate("/");

@@ -13,6 +13,6 @@ export const sessionMiddleware = session({
     httpOnly: true,
     secure: false,
     sameSite: "lax",
-    maxAge: 1000 * 60 * 60 * 10,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
   },
 });
