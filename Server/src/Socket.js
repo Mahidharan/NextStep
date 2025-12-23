@@ -1,16 +1,5 @@
 import { WebSocketServer } from "ws";
-import session from "express-session";
-import MongoStore from "connect-mongo";
 import { sessionMiddleware } from "./Session.js";
-
-const sessionParser = session({
-  secret: "NEXTSTEP_SECRET",
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGO_URL,
-  }),
-});
 
 function initWebSocket(server) {
   const wss = new WebSocketServer({ noServer: true });
