@@ -35,7 +35,7 @@ function PostDetails() {
     if (newComment.trim() === "") return;
 
     try {
-      const res = await api.get(`post/comment/${id}`, {
+      const res = await api.post(`post/comment/${id}`, {
         userId: user._id,
         username: user.username,
         text: newComment,
