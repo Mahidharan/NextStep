@@ -4,9 +4,7 @@ import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 const postSchema = new Schema(
   {
     userAvatar: {
-      type: {
-        url: String,
-      },
+      type: String,
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,

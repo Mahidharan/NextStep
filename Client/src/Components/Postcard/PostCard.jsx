@@ -17,7 +17,7 @@ function PostCard({ post }) {
     <div className="post-card">
       <div className="userinfo">
         <img
-          src={post?.userAvatar?.url}
+          src={post?.userAvatar}
           alt="elango avatar"
           onClick={() => changePage(`/profile/${post.userId}`)}
         />

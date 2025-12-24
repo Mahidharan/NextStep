@@ -7,9 +7,9 @@ import { User } from "../Models/user.models.js";
 
 //Creating Post
 const createPost = asyncHandler(async (req, res) => {
-  const { userId, username, company, experience } = req.body;
+  const { userId, company, experience } = req.body;
 
-  if (!userId || !username || !company || !experience) {
+  if (!userId || !company || !experience) {
     throw new ApiError(400, "All Fields are required ");
   }
 
