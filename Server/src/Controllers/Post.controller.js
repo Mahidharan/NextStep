@@ -37,7 +37,7 @@ const createPost = asyncHandler(async (req, res) => {
     company,
     experience: experience,
     image: imageUrl,
-    userAvatar: user?.avatar,
+    userAvatar: user?.avatar?.url,
   });
 
   if (!post) {
@@ -90,21 +90,28 @@ const getPostByUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, posts, "User Posts fetched successfully"));
 });
 
+//Adding Comment
 const addComment = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const { userId, username, text } = req.body;
+  const { userId, text } = req.body;
 
-  if (!userId || !username || !text) {
+  if (!userId || !text) {
     throw new ApiError(400, "All comment fields are required");
   }
+  const user = await User.findById(userId).select("username avatar");
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+
   let post = await Post.findById(id);
   if (!post) {
     throw new ApiError(404, "Post Not Found");
   }
 
   post.comments.push({
+    avatar: user.avatar?.url,
     userId,
-    username,
+    username: user.username,
     text,
   });
   await post.save();

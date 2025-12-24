@@ -112,6 +112,12 @@
   flex-shrink: 0;
 }
 
+.comment-avatar img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50px;
+}
+
 .comment-content {
   display: flex;
   flex-direction: column;

@@ -30,6 +30,9 @@ const postSchema = new Schema(
     },
     comments: [
       {
+        avatar: {
+          type: String,
+        },
         userId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "User",

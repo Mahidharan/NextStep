@@ -38,12 +38,12 @@ function PostDetails() {
     try {
       const res = await api.post(`post/comment/${id}`, {
         userId: user._id,
-        username: user.username,
         text: newComment,
       });
 
       setComments(res.data.data.comments);
       setNewComment("");
+      console.log("Logged-in user:", user);
     } catch (error) {
       console.error(error);
     }
@@ -87,7 +87,11 @@ function PostDetails() {
                 {comments.map((comment, index) => (
                   <div className="comment-card" key={index}>
                     <div className="comment-avatar">
-                      {comment.username.charAt(0).toUpperCase()}
+                      {comment.avatar ? (
+                        <img src={comment.avatar} alt={comment.username} />
+                      ) : (
+                        <span>{comment.username.charAt(0).toUpperCase()}</span>
+                      )}
                     </div>
 
                     <div className="comment-content">
