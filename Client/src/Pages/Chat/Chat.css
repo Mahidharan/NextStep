@@ -84,6 +84,14 @@
   font-weight: 500;
   margin: 0;
 }
+.user-item .online-dot {
+  width: 8px;
+  height: 8px;
+  background: #00ff6a;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 6px;
+}
 
 .msg-container {
   flex: 3;

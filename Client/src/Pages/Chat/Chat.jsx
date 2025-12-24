@@ -6,6 +6,7 @@ import { FaPaperPlane } from "react-icons/fa";
 import { api } from "../../API/axios.js";
 import Loader from "../../Components/Loader/Loader.jsx";
 import Avatar from "../../assets/defaultavatar.png";
+import { useAuth } from "../../Context/AuthContext.jsx";
 
 function Chat() {
   const [search, setSearch] = useState("");
@@ -15,6 +16,8 @@ function Chat() {
   const [message, setMessage] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const { user } = useAuth();
 
   const chatEndRef = useRef(null);
 
@@ -36,6 +39,12 @@ function Chat() {
 
   const socketRef = useRef(null);
 
+  const selectedUserRef = useRef(null);
+
+  useEffect(() => {
+    selectedUserRef.current = selectedUser;
+  }, [selectedUser]);
+
   useEffect(() => {
     socketRef.current = new WebSocket("ws://localhost:8000");
 
@@ -44,13 +53,36 @@ function Chat() {
     };
 
     socketRef.current.onmessage = (event) => {
-      const msg = JSON.parse(event.data);
-      setMessage((prev) => [...prev, msg]);
+      const msg = event.data.type ? event.data.data : JSON.parse(event.data);
+
+      if (msg.type === "ONLINE_USERS") {
+        setOnlineUsers(msg.users);
+        return;
+      }
+
+      const currentChatUser = selectedUserRef.current;
+      if (!currentChatUser) return;
+
+      const senderId = msg.sender?._id || msg.sender;
+      const receiverId = msg.receiver?._id || msg.receiver;
+
+      const isCurrentChat =
+        (senderId === currentChatUser._id && receiverId === user._id) ||
+        (senderId === user._id && receiverId === currentChatUser._id);
+
+      if (isCurrentChat) {
+        setMessage((prev) => [...prev, msg]);
+      }
     };
+
     socketRef.current.onclose = () => {
       console.log("WebSocket disconnected");
     };
-    return () => socketRef.current.close();
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.close();
+      }
+    };
   }, []);
 
   const openChat = async (user) => {
@@ -70,16 +102,27 @@ function Chat() {
   const sendMessage = async () => {
     if (!newMessage.trim() || !selectedUser) return;
 
-    const res = await api.post("/chat/send", {
+    const payload = {
+      sender: user._id,
+      receiver: selectedUser._id,
+      text: newMessage,
+      createdAt: new Date(),
+    };
+
+    setMessage((prev) => [...prev, payload]);
+
+    socketRef.current.send(
+      JSON.stringify({
+        type: "MESSAGE",
+        data: payload,
+      })
+    );
+
+    await api.post("/chat/send", {
       receiverId: selectedUser._id,
       text: newMessage,
     });
 
-    const msg = {
-      text: newMessage,
-      receiverId: selectedUser._id,
-    };
-    socketRef.current.send(JSON.stringify(msg));
     setNewMessage("");
   };
 
@@ -124,6 +167,9 @@ function Chat() {
                 />
                 <div>
                   <h4>{user.name}</h4>
+                  {onlineUsers.includes(user._id) && (
+                    <span className="online-dot"></span>
+                  )}
                 </div>
               </div>
             ))}
@@ -151,13 +197,16 @@ function Chat() {
                   <div
                     key={msg._id || `${msg.sender?._id}-${index}`}
                     className={`message ${
-                      msg.sender?._id === selectedUser._id ? "received" : "sent"
+                      (msg.sender?._id || msg.sender) === user._id
+                        ? "sent"
+                        : "received"
                     }`}
                   >
                     {msg.text}
-                    <div ref={chatEndRef}></div>
                   </div>
                 ))}
+                <div ref={chatEndRef}></div>
+
                 <div className="chat-input">
                   <input
                     type="text"

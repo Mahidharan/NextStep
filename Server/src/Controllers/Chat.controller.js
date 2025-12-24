@@ -18,9 +18,14 @@ const sendMessage = asyncHandler(async (req, res) => {
     text,
   });
 
+  const populatedChat = await Chat.findById(chat._id).populate(
+    "sender receiver",
+    "name avatar",
+  );
+
   return res
     .status(200)
-    .json(new ApiResponse(200, chat, "Message Sent Successfully"));
+    .json(new ApiResponse(200, populatedChat, "Message Sent Successfully"));
 });
 
 const getMessage = asyncHandler(async (req, res) => {
