@@ -4,6 +4,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import "./PostDetails.css";
 import { useAuth } from "../../Context/AuthContext";
 import Loader from "../../Components/Loader/Loader";
+import Footer from "../../Components/Footer/Footer.jsx";
 import { api } from "../../API/axios.js";
 
 function PostDetails() {
@@ -60,46 +61,65 @@ function PostDetails() {
   }
 
   return (
-    <div className="post-detail-page">
-      <Navbar />
+    <>
+      <div className="post-detail-page">
+        <Navbar />
 
-      <div className="post-detail-card">
-        <div className="post-header">
-          <h2>{post.username}</h2>
-          <p>{post.company}</p>
-        </div>
-        <div className="img-container">
-          <img src={post.image} alt="" />
-        </div>
-        <div className="post-body">
-          <p>{post.experience}</p>
-        </div>
-
-        <div className="post-comments">
-          <h3>Comments ({comments.length}) </h3>
-          <ul>
-            {comments.map((comment, index) => (
-              <li key={index}>
-                <strong>{comment.username}</strong>: {comment.text}
-              </li>
-            ))}
-          </ul>
-          <div className="add-comment">
-            <input
-              type="text"
-              value={newComment}
-              placeholder="Write a comment"
-              onChange={(e) => setNewComment(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleAddComment()}
-            />
-            <button onClick={handleAddComment}>Add</button>
+        <div className="post-detail-card">
+          <div className="post-header">
+            <h2>{post.username}</h2>
+            <p>{post.company}</p>
           </div>
+          <div className="img-container">
+            <img src={post.image} alt="" />
+          </div>
+          <div className="post-body">
+            <p>{post.experience}</p>
+          </div>
+
+          <div className="post-comments">
+            <h3>💬 Comments ({comments.length})</h3>
+
+            {comments.length === 0 ? (
+              <p className="no-comments">Be the first one to comment ✨</p>
+            ) : (
+              <div className="comment-list">
+                {comments.map((comment, index) => (
+                  <div className="comment-card" key={index}>
+                    <div className="comment-avatar">
+                      {comment.username.charAt(0).toUpperCase()}
+                    </div>
+
+                    <div className="comment-content">
+                      <span className="comment-username">
+                        {comment.username}
+                      </span>
+                      <p className="comment-text">{comment.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="add-comment">
+              <input
+                type="text"
+                value={newComment}
+                placeholder="Write your thoughts..."
+                onChange={(e) => setNewComment(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleAddComment()}
+              />
+              <button onClick={handleAddComment}>Post</button>
+            </div>
+          </div>
+
+          <Link to="/" className="back-button">
+            ⬅ Back
+          </Link>
         </div>
-        <Link to="/" className="back-button">
-          ⬅ Back
-        </Link>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 
