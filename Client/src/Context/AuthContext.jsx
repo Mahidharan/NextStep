@@ -9,15 +9,17 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const res = await fetch("http://localhost:8000/api/user/me", {
-          credentials: "include",
-        });
+        const res = await fetch(
+          "https://nextstep-16qi.onrender.com/api/user/me",
+          {
+            credentials: "include",
+          }
+        );
 
         if (!res.ok) throw new Error("Not logged in");
 
         const data = await res.json();
         setUser(data.user);
-
       } catch (err) {
         setUser(null);
         localStorage.removeItem("nextstep-user");
@@ -30,7 +32,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const logout = async () => {
-    await fetch("http://localhost:8000/api/user/logout", {
+    await fetch("https://nextstep-16qi.onrender.com/api/user/logout", {
       method: "POST",
       credentials: "include",
     });
