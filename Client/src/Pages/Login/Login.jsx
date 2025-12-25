@@ -29,7 +29,9 @@ function Login() {
           <button
             className="login-btn"
             onClick={() => {
-              window.location.href = "https://nextstep-16qi.onrender.com";
+              window.location.href = `${
+                import.meta.env.VITE_BACKEND_URL
+              }/api/user/google`;
             }}
           >
             <FcGoogle />

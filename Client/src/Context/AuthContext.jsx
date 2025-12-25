@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
-
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -9,12 +9,9 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const res = await fetch(
-          "https://nextstep-16qi.onrender.com/api/user/me",
-          {
-            credentials: "include",
-          }
-        );
+        const res = await fetch(`${API_URL}/api/user/me`, {
+          credentials: "include",
+        });
 
         if (!res.ok) throw new Error("Not logged in");
 
@@ -32,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const logout = async () => {
-    await fetch("https://nextstep-16qi.onrender.com/api/user/logout", {
+    await fetch(`${API_URL}/api/user/logout`, {
       method: "POST",
       credentials: "include",
     });
