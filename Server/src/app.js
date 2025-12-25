@@ -14,14 +14,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 //CORS configuration
+
+const allowedOrigins = [process.env.ORIGIN, "http://localhost:5173"];
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS not allowed"));
+      }
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
+
+app.set("trust proxy", 1);
 
 app.use(sessionMiddleware);
 
