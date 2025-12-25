@@ -8,8 +8,10 @@ import {
 } from "../Controllers/User.controller.js";
 import { upload } from "../Middlewares/Multer.middleware.js";
 import passport from "../Config/googleAuth.js";
+import dotenv from "dotenv";
 
 const router = Router();
+dotenv.config();
 
 router
   .route("/google")
@@ -17,13 +19,13 @@ router
 
 router.route("/google/callback").get(
   passport.authenticate("google", {
-    failureRedirect: "http://localhost:5173/login",
+    failureRedirect: `${process.env.ORIGIN}/login`,
   }),
   (req, res) => {
     const user = req.user;
 
     res.redirect(
-      `http://localhost:5173/auth-success?user=${JSON.stringify(user)}`,
+      `${process.env.ORIGINs}/auth-success?user=${JSON.stringify(user)}`,
     );
   },
 );
