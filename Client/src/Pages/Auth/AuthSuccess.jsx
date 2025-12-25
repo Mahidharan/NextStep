@@ -1,33 +1,24 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 import Loader from "../../Components/Loader/Loader.jsx";
 
 function AuthSuccess() {
   const navigate = useNavigate();
-  const location = useLocation();
+  const { user, loading } = useAuth();
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const userString = params.get("user");
-
-    if (userString) {
-      try {
-        const user = JSON.parse(userString);
-
-        setTimeout(() => {
-          navigate("/");
-        }, 3000);
-      } catch (err) {
-        console.error("Error parsing user", err);
+    if (!loading) {
+      if (user) {
+        navigate("/");
+      } else {
+        navigate("/login");
       }
-    } else {
-      navigate("/login");
     }
-  }, []);
+  }, [user, loading, navigate]);
 
   return (
     <div className="auth-loader">
-      <div className="loader-circle"></div>
       <Loader />
     </div>
   );
