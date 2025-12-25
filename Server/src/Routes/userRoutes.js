@@ -25,7 +25,7 @@ router.route("/google/callback").get(
     const user = req.user;
 
     res.redirect(
-      `${process.env.ORIGINs}/auth-success?user=${JSON.stringify(user)}`,
+      `${process.env.ORIGIN}/auth-success?user=${JSON.stringify(user)}`,
     );
   },
 );
