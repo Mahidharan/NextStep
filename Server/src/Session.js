@@ -1,8 +1,10 @@
 import session from "express-session";
 import MongoStore from "connect-mongo";
 
+dotenv.config();
+
 export const sessionMiddleware = session({
-  secret: "NEXTSTEP_SECRET",
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
