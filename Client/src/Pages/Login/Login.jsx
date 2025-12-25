@@ -29,7 +29,7 @@ function Login() {
           <button
             className="login-btn"
             onClick={() => {
-              window.location.href = "http://localhost:8000/api/user/google";
+              window.location.href = "https://nextstep-16qi.onrender.com";
             }}
           >
             <FcGoogle />
