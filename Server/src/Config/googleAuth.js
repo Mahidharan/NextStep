@@ -14,24 +14,29 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const googleId = profile.id;
-        const name = profile.displayName;
-        const email = profile.emails[0].value;
-        const avatar = profile.photos[0].value;
+        const email = profile.emails?.[0]?.value;
+        const name = profile.displayName || "Google User";
+        const avatar = profile.photos?.[0]?.value || "";
 
-        let user = await User.findOne({ googleId });
+        if (!email) {
+          return done(new Error("Google account has no email"), null);
+        }
+
+        // ✅ FIND BY EMAIL (correct way)
+        let user = await User.findOne({ email });
 
         if (!user) {
           user = await User.create({
-            googleId,
             name,
             email,
             avatar: { url: avatar },
+            provider: "google",
           });
         }
 
         return done(null, user);
       } catch (err) {
+        console.error("Google Auth Error:", err);
         return done(err, null);
       }
     },
@@ -43,8 +48,12 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-  const user = await User.findById(id);
-  done(null, user);
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err, null);
+  }
 });
 
 export default passport;
