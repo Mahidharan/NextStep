@@ -22,7 +22,6 @@ passport.use(
           return done(new Error("Google account has no email"), null);
         }
 
-        // ✅ FIND BY EMAIL (correct way)
         let user = await User.findOne({ email });
 
         if (!user) {
