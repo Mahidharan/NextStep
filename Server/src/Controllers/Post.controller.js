@@ -16,13 +16,10 @@ const createPost = asyncHandler(async (req, res) => {
   let imageUrl = null;
 
   if (req.file) {
-    const cloudinaryFile = await uploadCloudinary(req.file.path);
-
-    if (!cloudinaryFile) {
-      throw new ApiError(400, "Post Image Upload failed");
+    imageUrl = await uploadCloudinary(req.file.buffer);
+    if (!imageUrl) {
+      throw new ApiError(400, "Post image upload failed");
     }
-
-    imageUrl = cloudinaryFile;
   }
 
   const user = await User.findById(userId).select("avatar name username");
