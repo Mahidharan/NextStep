@@ -105,8 +105,8 @@
     display: none;
     position: absolute;
     top: 65px;
-    right: 0;
-    width: 100%;
+    right: 10px;
+    width: 70%;
     flex-direction: column;
     background: linear-gradient(90deg, #0b063f, #1a104f);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
