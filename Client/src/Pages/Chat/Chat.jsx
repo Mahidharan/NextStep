@@ -21,8 +21,6 @@ function Chat() {
 
   const chatEndRef = useRef(null);
 
-
-  
   useEffect(() => {
     const fetchUsers = async () => {
       if (!search.trim()) {
