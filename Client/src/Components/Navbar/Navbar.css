@@ -104,7 +104,7 @@
   .nav-links {
     display: none;
     position: absolute;
-    top: 58px;
+    top: 0;
     right: 12px;
     width: 60%;
     flex-direction: column;
