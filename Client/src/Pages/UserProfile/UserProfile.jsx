@@ -23,8 +23,8 @@ function UserProfile() {
 
         // API calls
         const [userRes, postRes] = await Promise.all([
-          api.get(`/user/profile/${userId}`),
-          api.get(`/post/user/${userId}`),
+          api.get(`/api/user/profile/${userId}`),
+          api.get(`/api/post/user/${userId}`),
         ]);
 
         setUser(userRes.data.data);
