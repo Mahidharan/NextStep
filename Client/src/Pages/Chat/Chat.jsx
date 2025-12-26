@@ -28,7 +28,7 @@ function Chat() {
         return;
       }
       try {
-        const res = await api.get(`/user/search?query=${search}`);
+        const res = await api.get(`/api/user/search?query=${search}`);
         setUsers(res.data.data);
       } catch (error) {
         console.error("User search error", error);
