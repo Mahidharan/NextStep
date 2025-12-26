@@ -104,12 +104,13 @@
   .nav-links {
     display: none;
     position: absolute;
-    top: 65px;
-    right: 10px;
-    width: 70%;
+    top: 62px;
+    right: 0;
+    width: 50%;
     flex-direction: column;
-    background: linear-gradient(180deg, #0f172adb, #0b1120df);
+    background: linear-gradient(180deg, #0f172afa, #0b1120ef);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 0.8rem;
     padding: 1rem 0;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
     list-style: none;
