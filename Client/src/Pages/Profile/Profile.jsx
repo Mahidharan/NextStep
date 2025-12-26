@@ -52,7 +52,7 @@ function Profile() {
     if (!user?._id) return;
     setLoading(true);
     api
-      .get(`/user/profile/${user._id}`)
+      .get(`/api/user/profile/${user._id}`)
       .then((res) => {
         const fetchedUser = res.data.data;
         setUserData({
@@ -76,7 +76,7 @@ function Profile() {
     formData.append("avatar", file);
 
     try {
-      const res = await api.put(`/user/avatar/${user._id}`, formData, {
+      const res = await api.put(`/api/user/avatar/${user._id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -106,7 +106,7 @@ function Profile() {
 
     try {
       const res = await api.put(
-        `/user/profile/${user._id}/upload-resume`,
+        `/api/user/profile/${user._id}/upload-resume`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -132,7 +132,10 @@ function Profile() {
         linkedIn: userData.linkedIn,
       };
 
-      const res = await api.put(`/user/profile/update/${user._id}`, payload);
+      const res = await api.put(
+        `/api/user/profile/update/${user._id}`,
+        payload
+      );
       updateUser(res.data.data);
       setIsEditing(false);
     } catch (error) {

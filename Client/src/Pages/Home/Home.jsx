@@ -13,7 +13,7 @@ function Home() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await api.get("api/post/all");
+        const res = await api.get("/api/post/all");
         setPosts(res.data.data);
 
         const elapsed = Date.now();

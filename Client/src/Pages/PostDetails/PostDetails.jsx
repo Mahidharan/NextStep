@@ -20,7 +20,7 @@ function PostDetails() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await api.get(`api/post/${id}`);
+        const res = await api.get(`/api/post/${id}`);
         setPost(res.data.data);
         setComments(res.data.data.comments || []);
       } catch (error) {
@@ -36,7 +36,7 @@ function PostDetails() {
     if (newComment.trim() === "") return;
 
     try {
-      const res = await api.post(`api/post/comment/${id}`, {
+      const res = await api.post(`/api/post/comment/${id}`, {
         userId: user._id,
         text: newComment,
       });

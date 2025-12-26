@@ -57,7 +57,7 @@ function CreatePost() {
       formData.append("experience", postData.experience);
       formData.append("postImage", image);
 
-      const res = await api.post("api/post/create", formData, {
+      const res = await api.post("/api/post/create", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       toast.success("Post created successfully");
