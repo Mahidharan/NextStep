@@ -46,7 +46,7 @@ function Chat() {
   }, [selectedUser]);
 
   useEffect(() => {
-    socketRef.current = new WebSocket("ws://localhost:8000");
+    socketRef.current = new WebSocket(import.meta.env.VITE_WS_URL);
 
     socketRef.current.onopen = () => {
       console.log("✅WebSocket connected");
