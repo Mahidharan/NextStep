@@ -104,11 +104,11 @@
   .nav-links {
     display: none;
     position: absolute;
-    top: 62px;
-    right: 10px;
+    top: 58px;
+    right: 12px;
     width: 50%;
     flex-direction: column;
-    background: linear-gradient(180deg, #0f172afa, #0b1120ef);
+    background: linear-gradient(180deg, #0f172a, #0b1120);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 0.8rem;
     padding: 1rem 0;
