@@ -108,7 +108,7 @@
     right: 10px;
     width: 70%;
     flex-direction: column;
-    background: linear-gradient(90deg, #0b063fbe, #1b104fd2);
+    background: linear-gradient(180deg, #0f172adb, #0b1120df);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding: 1rem 0;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
