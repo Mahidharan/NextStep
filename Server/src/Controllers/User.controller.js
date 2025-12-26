@@ -75,7 +75,7 @@ const uploadResume = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Resume file not found");
   }
 
-  const cloudUrl = await uploadCloudinary(req.file.path, "raw");
+  const cloudUrl = await uploadCloudinary(req.file.buffer, "raw");
 
   if (!cloudUrl) {
     throw new ApiError(400, "Resume upload failed");
@@ -100,7 +100,7 @@ const uploadAvatar = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Image Not found");
   }
 
-  const cloudUrl = await uploadCloudinary(req.file.path);
+  const cloudUrl = await uploadCloudinary(req.file.buffer);
 
   if (!cloudUrl) {
     throw new ApiError(400, "Failed to upload image");
