@@ -90,7 +90,7 @@ function Chat() {
     setLoading(true);
 
     try {
-      const res = await api.get(`chat/${user._id}`);
+      const res = await api.get(`/api/chat/${user._id}`);
       setMessage(res.data.data);
     } catch (error) {
       console.error(error);
@@ -118,7 +118,7 @@ function Chat() {
       })
     );
 
-    await api.post("/chat/send", {
+    await api.post("/api/chat/send", {
       receiverId: selectedUser._id,
       text: newMessage,
     });
