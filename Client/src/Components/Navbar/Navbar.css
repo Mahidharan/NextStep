@@ -106,13 +106,13 @@
     position: absolute;
     top: 58px;
     right: 12px;
-    width: 50%;
+    width: 60%;
     flex-direction: column;
     background: linear-gradient(180deg, #0f172a, #0b1120);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 0.8rem;
     padding: 1rem 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 5px 15px rgba(65, 65, 65, 0.4);
     list-style: none;
     align-items: center;
     gap: 0.8rem;
