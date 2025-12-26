@@ -25,11 +25,22 @@ passport.use(
         let user = await User.findOne({ email });
 
         if (!user) {
+          const baseUsername = name.replace(/\+s/g, "").toLowerCase();
+
+          let username;
+          let isUnique = false;
+
+          while (!isUnique) {
+            const random = Math.floor(1000 + Math.random() * 9000);
+            username = `${baseUsername}_${random}`;
+            const exists = await User.findOne({ username });
+            if (!exists) isUnique = true;
+          }
           user = await User.create({
             name,
             email,
+            username,
             avatar: { url: avatar },
-            provider: "google",
           });
         }
 
