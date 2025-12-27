@@ -1,7 +1,7 @@
 import "./Footer.css";
 import { Link } from "react-router-dom";
 import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
-import logo from "../../assets/logo.jpg";
+import logo from "../../assets/nextsteplogo.png";
 
 const Footer = () => {
   return (

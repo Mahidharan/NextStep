@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Logo from "../../assets/logo.jpeg";
+import Logo from "../../assets/nextsteplogo.png";
 import UserIcon from "../../assets/usericon.jpg";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
@@ -25,9 +25,8 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="nav-left">
+      <div className="nav-left" onClick={() => navigate("/")}>
         <img src={Logo} alt="NextStep Logo" className="logo" />
-        <h1 className="title">NextStep</h1>
       </div>
 
       <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
@@ -35,21 +34,28 @@ function Navbar() {
           <FaHome className="icon" />
           <span>Home</span>
         </li>
-        <li onClick={() => handleMenuChange("/my-profile")}>
-          <FaUser className="icon" />
-          <span>My Profile</span>
-        </li>
+
         <li onClick={() => handleMenuChange("/chat")}>
           <BsFillChatLeftFill className="icon" />
           <span>Chat</span>
         </li>
-        <li onClick={() => handleMenuChange("/create-post")}>
-          <IoIosCreate className="icon" />
-          <span>Create Post</span>
+
+        <li onClick={() => handleMenuChange("/my-profile")}>
+          <FaUser className="icon" />
+          <span>Profile</span>
         </li>
+
+        <li
+          className="create-post-btn"
+          onClick={() => handleMenuChange("/create-post")}
+        >
+          <IoIosCreate className="icon" />
+          <span>Create</span>
+        </li>
+
         <li className="logout" onClick={logout}>
           <FiLogOut className="icon" />
-          <span>Log Out</span>
+          <span>Logout</span>
         </li>
       </ul>
 
@@ -57,6 +63,7 @@ function Navbar() {
         <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <FaTimes /> : <RiMenu3Fill />}
         </div>
+
         <img
           src={user?.avatar?.url}
           onError={(e) => (e.target.src = UserIcon)}

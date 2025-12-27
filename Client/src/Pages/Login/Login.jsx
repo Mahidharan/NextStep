@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./Login.css";
-import Logo from "../../assets/logo.jpg";
+import Logo from "../../assets/nextsteplogo.png";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 
