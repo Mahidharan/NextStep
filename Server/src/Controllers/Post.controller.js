@@ -25,7 +25,7 @@ const createPost = asyncHandler(async (req, res) => {
   const user = await User.findById(userId).select("avatar name username");
 
   if (!user) {
-    throw ApiError(404, "User Not Found");
+    throw new ApiError(404, "User Not Found");
   }
 
   const post = await Post.create({
@@ -42,8 +42,8 @@ const createPost = asyncHandler(async (req, res) => {
   }
 
   return res
-    .status(200)
-    .json(new ApiResponse(200, post, "Post created successfully"));
+    .status(201)
+    .json(new ApiResponse(201, post, "Post created successfully"));
 });
 
 //getPost

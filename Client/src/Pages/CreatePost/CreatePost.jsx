@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import "./CreatePost.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import Avatar from "../../assets/defaultavatar.png";
-import { BsArrowBarLeft } from "react-icons/bs";
 import { FaPaperPlane } from "react-icons/fa";
 import { FaUpload } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { api } from "../../API/axios";
 import { useAuth } from "../../Context/AuthContext";
 
@@ -55,7 +54,9 @@ function CreatePost() {
       formData.append("userId", user._id);
       formData.append("company", postData.company);
       formData.append("experience", postData.experience);
-      formData.append("postImage", image);
+      if (image) {
+        formData.append("postImage", image);
+      }
 
       const res = await api.post("/api/post/create", formData, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -72,66 +73,70 @@ function CreatePost() {
     <div className="main">
       <Navbar />
       <div className="container">
-        <div className="header">
-          <div className="image">
-            <img src={user?.avatar?.url} alt="" />
-            <p>{user?.username || user?.name || "User"}</p>
+        <div className="create-header">
+          <div className="author">
+            <img src={user?.avatar?.url || Avatar} alt="user" />
+            <div>
+              <p className="author-name">{user?.name || "User"}</p>
+              <span>@{user?.username}</span>
+            </div>
           </div>
-          <h2>Create Post Share Experience</h2>
         </div>
-        <form onSubmit={handleSubmit}>
-          <div className="input-container">
-            <label>Company Name</label>
+
+        <form onSubmit={handleSubmit} className="create-form">
+          <div className="field">
+            <label>Company</label>
             <input
               name="company"
               type="text"
+              placeholder="Eg: Google, Amazon, Zoho"
               value={postData.company}
               onChange={handleChange}
-              required={true}
+              required
             />
+          </div>
+
+          <div className="field">
             <label>Experience</label>
             <textarea
               name="experience"
+              placeholder="Describe your interview process, questions, difficulty, tips..."
               value={postData.experience}
               onChange={handleChange}
-              required={true}
-            ></textarea>
+              required
+            />
           </div>
-          <div className="upload-image">
+
+          <div className="media-row">
             <label htmlFor="file-upload" className="upload-label">
-              <span className="upload-icon">
-                <FaUpload />
-              </span>{" "}
-              Upload Image
+              <FaUpload /> Add image (optional)
             </label>
             <input
-              name="postImage"
               id="file-upload"
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              required={true}
+              hidden
             />
-
-            {preview && (
-              <div>
-                <img
-                  src={preview}
-                  alt=""
-                  style={{ width: "200px", height: "auto", marginTop: "10px" }}
-                />
-              </div>
-            )}
           </div>
-          <div className="btns">
-            <button onClick={() => change("/")}>
-              <BsArrowBarLeft />
+
+          {preview && (
+            <div className="image-preview">
+              <img src={preview} alt="preview" />
+            </div>
+          )}
+
+          <div className="actions">
+            <button
+              type="button"
+              className="cancel"
+              onClick={() => change("/")}
+            >
               Cancel
             </button>
-            <button type="submit" className="post-btn">
-              <FaPaperPlane /> Post
+            <button type="submit" className="publish">
+              <FaPaperPlane /> Publish
             </button>
-            <ToastContainer />
           </div>
         </form>
       </div>
