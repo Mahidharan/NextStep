@@ -8,7 +8,7 @@
   padding: 0 1rem;
   align-items: center;
   justify-content: space-between;
-  background: rgba(11, 15, 25, 0.9);
+  background: linear-gradient(180deg, #0f172a, #0b1120);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(104, 101, 101, 0.06);
   z-index: 1000;
@@ -47,7 +47,6 @@
   font-size: 0.95rem;
   font-weight: 500;
   color: #e5e7eb;
-
   cursor: pointer;
   transition: background 0.25s ease, color 0.25s ease;
 }
@@ -59,7 +58,7 @@
 
 .create-post-btn {
   background: linear-gradient(135deg, #3b82f6, #2563eb);
-  color: #ffffff !important;
+  color: #ffffff;
   font-weight: 600;
 }
 
@@ -135,7 +134,9 @@
   .profile-img {
     display: none;
   }
-
+  .create-post-btn {
+    background: none;
+  }
   .hamburger {
     display: block;
   }

@@ -154,6 +154,22 @@ function Profile() {
   return (
     <>
       <Navbar />
+      <ToastContainer
+        position={window.innerWidth < 768 ? "top-center" : "top-center"}
+        autoClose={4000}
+        hideProgressBar
+        closeOnClick
+        pauseOnHover
+        theme="dark"
+        toastStyle={{
+          backgroundColor: "#0b1224",
+          color: "#e5e7eb",
+          border: "1px solid rgba(99,102,241,0.6)",
+          borderRadius: "12px",
+          fontFamily: "Poppins",
+          marginTop: "2rem",
+        }}
+      />
       <div className="profile-layout">
         <aside className="profile-sidebar">
           <div className="profile-image-container">
@@ -192,21 +208,6 @@ function Profile() {
           >
             {isEditing ? "Save Profile" : "Edit Profile"}
           </button>
-          <ToastContainer
-            position="top-center"
-            autoClose={2000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            theme="dark"
-            toastStyle={{
-              backgroundColor: "#151823",
-              color: "#e5e5e5",
-              border: "1px solid #6c63ff",
-              borderRadius: "10px",
-              fontFamily: "Poppins",
-            }}
-          />
         </aside>
 
         <div className="profile-main">
