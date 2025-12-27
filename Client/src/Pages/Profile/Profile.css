@@ -10,7 +10,11 @@
 
 .profile-sidebar {
   width: 240px;
-  background: #00121d;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.01)
+  );
   backdrop-filter: blur(12px);
   border-radius: 18px;
   border: 1px solid rgba(54, 53, 53, 0.997);
@@ -82,7 +86,11 @@
 
 .profile-card,
 .document-card {
-  background: #00121d;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.01)
+  );
   backdrop-filter: blur(12px);
   border-radius: 18px;
   padding: 1.6rem;
