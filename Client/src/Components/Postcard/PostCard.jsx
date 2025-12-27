@@ -1,53 +1,55 @@
 import React from "react";
 import "./PostCard.css";
-import { FaRegComment } from "react-icons/fa";
+import { FaRegComment, FaThumbsUp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { MdOutlineReadMore } from "react-icons/md";
+import UserIcon from "../../assets/usericon.jpg";
 
 function PostCard({ post }) {
   const navigate = useNavigate();
 
-  const changePage = (page) => {
-    if (!page) return;
-
-    navigate(page);
-  };
-
   return (
     <div className="post-card">
-      <div className="userinfo">
-        <img
-          src={post?.userAvatar}
-          alt="elango avatar"
-          onClick={() => changePage(`/profile/${post.userId}`)}
-        />
-        <div className="uname-company">
-          <h3>{post.username}</h3>
-          <p> {post.company} </p>
+      {/* HEADER */}
+      <div className="post-header">
+        <div className="post-user">
+          <img
+            src={post?.userAvatar || UserIcon}
+            alt="user"
+            onClick={() => navigate(`/profile/${post.userId}`)}
+          />
+
+          <div>
+            <p className="username">{post.username}</p>
+          </div>
         </div>
+
+        <span className="company-badge">{post.company}</span>
       </div>
-      <div className="post-img">
-        <img src={post.image} alt="" loading="lazy" />
-      </div>
-      <div className="experience">
-        <p>
-          {" "}
-          {post.experience.length > 100
-            ? post.experience.slice(0, 100) + "..."
-            : post.experience}
-        </p>
-      </div>
-      <div className="btn">
-        <div className="comment">
-          <FaRegComment />
-          {post.comments.length}
+
+      <h4 className="post-title">{post.title || "Interview Experience"}</h4>
+
+      <p className="post-preview">
+        {post.experience.length > 160
+          ? post.experience.slice(0, 400) + "..."
+          : post.experience}
+      </p>
+
+      <div className="post-footer">
+        <div className="actions">
+          <span>
+            <FaThumbsUp /> {post.likes || 0}
+          </span>
+          <span>
+            <FaRegComment /> {post.comments.length}
+          </span>
         </div>
-        <div className="read-more">
-          <button onClick={() => changePage(`/post/${post._id}`)}>
-            <MdOutlineReadMore className="icon" />
-            Read More
-          </button>
-        </div>
+
+        <button
+          className="read-more"
+          onClick={() => navigate(`/post/${post._id}`)}
+        >
+          Read more →
+        </button>
       </div>
     </div>
   );
