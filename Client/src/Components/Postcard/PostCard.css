@@ -2,9 +2,9 @@
   background: linear-gradient(180deg, #0b1220, #0b1120);
   border-radius: 0.5rem;
   padding: 1.3rem 1.5rem;
-  max-width: 58%;
-  margin-bottom: 1.6rem;
+  width: 60%;
   border: 1px solid rgba(255, 255, 255, 0.04);
+  box-sizing: border-box;
 }
 
 .post-header {
@@ -96,4 +96,11 @@
 
 .read-more:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .post-card {
+    width: 114%;
+    margin-right: 5rem;
+  }
 }

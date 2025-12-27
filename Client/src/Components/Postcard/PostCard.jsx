@@ -9,7 +9,6 @@ function PostCard({ post }) {
 
   return (
     <div className="post-card">
-      {/* HEADER */}
       <div className="post-header">
         <div className="post-user">
           <img
@@ -30,7 +29,7 @@ function PostCard({ post }) {
 
       <p className="post-preview">
         {post.experience.length > 160
-          ? post.experience.slice(0, 400) + "..."
+          ? post.experience.slice(0, 250) + "..."
           : post.experience}
       </p>
 
